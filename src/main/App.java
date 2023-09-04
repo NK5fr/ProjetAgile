@@ -3,10 +3,10 @@ import java.io.File;
 import java.util.Scanner;
 
 public class App {
-    public Scanner scanner = new Scanner(System.in);
-    private Joueur joueur;
+    public static Scanner scanner = new Scanner(System.in);
+    private static Joueur joueur;
 
-    private void introduction(){
+    private static void introduction(){
         clear();
         System.out.print("Bonjour veillez entrer votre nom pour jouer : ");
         String nom = scanner.next();
@@ -15,6 +15,7 @@ public class App {
             clear();
             System.out.println("Ahh un nouveau joueur soit le bienvenu !!");
             joueur = new Joueur(nom, 100, 100, 100);
+            joueur.sauvegarder();
         }
     }
 
@@ -27,6 +28,6 @@ public class App {
 	}
 
     public static void main(String[] args) throws Exception {
-        
+        introduction();
     }
 }
