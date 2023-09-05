@@ -2,16 +2,19 @@ package test.BlackJack;
 
 import org.junit.jupiter.api.Test;
 
+import main.BlackJack.BlackJack;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-import main.BlackJack.User;
 
 public class BlackJack {
-    BlackJack j;
-    User u;
+    BlackJack b = new BlackJack(new User(100));
 
     @BeforeAll
     public static void beforeAllTests() {
@@ -25,8 +28,7 @@ public class BlackJack {
 
     @BeforeEach
 	public void beforeATest() {
-		j = new BlackJack();
-        u = new User(100);
+        b = new BlackJack(new User(100));
 	}
 
     @AfterEach
@@ -35,8 +37,8 @@ public class BlackJack {
     }
 
     @Test
-    public void testBet() {
-        
+    public void startingDealTest() {
+        assertEquals(u.);;
     }
     
 }
