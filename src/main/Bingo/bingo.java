@@ -1,6 +1,10 @@
 package main.Bingo;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
+
+import main.App;
 
 public class bingo {
     static ArrayList<String> grille1 = new ArrayList<>();
@@ -42,7 +46,7 @@ public class bingo {
     }
 
     
-    public static void jouer() throws InterruptedException{
+    public static void jouer()throws FileNotFoundException {
         clear();
         presentation();
         create_grille();
@@ -60,7 +64,7 @@ public class bingo {
         }
     }
 
-    public static void lancer() throws InterruptedException{
+    public static void lancer() throws FileNotFoundException{
         Random r = new Random();
         String chiffre;
         while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
@@ -69,7 +73,11 @@ public class bingo {
                 chiffre = r.nextInt(45) + "";
             }
             tire.add(chiffre + "");
-            Thread.sleep(2000);
+            try{
+                App.scanner.nextLine();
+            }catch(InputMismatchException e){
+                System.out.println("OK");
+            }
             affichageDé(chiffre);
             if(grille1.contains(chiffre)){
                 trouve1.set(g1, true);
@@ -189,7 +197,7 @@ public class bingo {
         System.out.flush();
     }
     
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws FileNotFoundException{
         jouer();
     }
 }
