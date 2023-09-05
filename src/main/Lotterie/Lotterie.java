@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-class Lotterie {
+public class Lotterie {
 
     private List<Integer> boules;
     private List<Integer> predictionBoules;
@@ -122,11 +122,22 @@ class Lotterie {
     public static void main(String[] args) {
         boolean trouver = true;
         int nb_trouver = 0;
+        System.out.println(".----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------."); 
+        System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |");
+        System.out.println("| |   _____      | || |     ____     | || |  _________   | || |  _________   | || |  _________   | || |  _______     | || |     _____    | || |  _______     | || |  _________   | |");
+        System.out.println("| |  |_   _|     | || |   .'    `.   | || | |  _   _  |  | || | |  _   _  |  | || | |_   ___  |  | || | |_   __ \\    | || |    |_   _|   | || | |_   __ \\    | || | |_   ___  |  | |");
+        System.out.println("| |    | |       | || |  /  .--.  \\  | || | |_/ | | \\_|  | || | |_/ | | \\_|  | || |   | |_  \\_|  | || |   | |__) |   | || |      | |     | || |   | |__) |   | || |   | |_  \\_|  | |");
+        System.out.println("| |    | |   _   | || |  | |    | |  | || |     | |      | || |     | |      | || |   |  _|  _   | || |   |  __ /    | || |      | |     | || |   |  __ /    | || |   |  _|  _   | |");
+        System.out.println("| |   _| |__/ |  | || |  \\  `--'  /  | || |    _| |_     | || |    _| |_     | || |  _| |___/ |  | || |  _| |  \\ \\_  | || |     _| |_    | || |  _| |  \\ \\_  | || |  _| |___/ |  | |");
+        System.out.println("| |  |________|  | || |   `.____.'   | || |   |_____|    | || |   |_____|    | || | |_________|  | || | |____| |___| | || |    |_____|   | || | |____| |___| | || | |_________|  | |");
+        System.out.println("| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |");
+        System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |");
+        System.out.println(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ");
         Lotterie l = new Lotterie();
         l.input_user();
         l.tirage();
-        System.out.println(l.getTirages());
-        System.out.println(l.getPredictionBoules());
+        System.out.println("Le tirages est:" + l.getTirages());
+        System.out.println("Votre prédiction est:" + l.getPredictionBoules());
         for (Integer integer : l.getTirages()) {
             if (l.getPredictionBoules().contains(integer)){
                 trouver = trouver && true;
@@ -142,8 +153,4 @@ class Lotterie {
             System.out.println("Dommage vous n'avez trouver que " + nb_trouver + " boules");
         }
     }
-
-
-
-    
 }
