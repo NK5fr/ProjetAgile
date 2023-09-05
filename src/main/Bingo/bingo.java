@@ -7,22 +7,22 @@ import java.util.Random;
 import main.App;
 
 public class bingo {
-    static ArrayList<String> grille1 = new ArrayList<>();
-    static ArrayList<String> grille2 = new ArrayList<>();
-    static ArrayList<String> grille3 = new ArrayList<>();
-    static ArrayList<String> grille4 = new ArrayList<>();
-    static ArrayList<String> grille5 = new ArrayList<>();
-    static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
-    static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
-    static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
-    static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
-    static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
-    static int g1 = 0;
-    static int g2 = 0;
-    static int g3 = 0;
-    static int g4 = 0;
-    static int g5 = 0;
-    static ArrayList<String> tire = new ArrayList<>();
+    public static ArrayList<String> grille1 = new ArrayList<String>();
+    public static ArrayList<String> grille2 = new ArrayList<String>();
+    public static ArrayList<String> grille3 = new ArrayList<String>();
+    public static ArrayList<String> grille4 = new ArrayList<String>();
+    public static ArrayList<String> grille5 = new ArrayList<String>();
+    public static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
+    public static int g1 = 0;
+    public static int g2 = 0;
+    public static int g3 = 0;
+    public static int g4 = 0;
+    public static int g5 = 0;
+    public static ArrayList<String> tire = new ArrayList<>();
 
     bingo(){
     }
@@ -114,6 +114,17 @@ public class bingo {
     }
     
     public static void create_grille(){
+        grille1.clear();
+        grille2.clear();
+        grille3.clear();
+        grille4.clear();
+        grille5.clear();
+        trouve1.clear();
+        trouve2.clear();
+        trouve3.clear();
+        trouve4.clear();
+        trouve5.clear();
+        tire.clear();
         Random r = new Random();
         String r1;
         //création des cinqs grilles
