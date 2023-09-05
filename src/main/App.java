@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class App {
     public static Scanner scanner = new Scanner(System.in);
     private static Joueur joueur;
-    public static int tempsJour = 24;
+    public static Jour jour;
 
     private static void introduction(){
         clear();
@@ -37,6 +37,39 @@ public class App {
         scanner.next();
     }
 
+    private static void boutique(){
+
+    }
+
+    private static void jouerArgent(){
+        boolean continuer = true;
+        char c;
+        while(continuer){
+            clear();
+            System.out.println("Jeux possibles :");
+            System.out.println("- la commande b permet de jouer au Bingo");
+            System.out.println("- la commande j permet de jouer au BlackJack");
+            System.out.println("- la commande r permet de jouer à la Roulette");
+            System.out.println("- la commande m permet de jouer à la Machine à sous");
+            System.out.println("- la commande l permet de jouer à la lotterie");
+            System.out.println("- la commande q permet de quitter ce menu");
+            c = ecouterChar();
+            if(c == 'b'){
+                
+            }else if(c == 'j'){
+                
+            }else if(c == 'r'){
+                
+            }else if(c == 'm'){
+                
+            }else if(c == 'l'){
+                ;
+            }else if(c == 'q'){
+                continuer = false;
+            }
+        }
+    }
+
     public static void clear()
 	{
         final String ESC = "\033[";
@@ -65,18 +98,25 @@ public class App {
             clear();
             System.out.println("Menu principal :");
             System.out.println("- la commande i affiche les informations sur le joueur");
+            System.out.println("- la commande b affiche la boutique");
+            System.out.println("- la commande j permet de jouer aux jeux d'argent");
             System.out.println("- la commande q permet de quitter le jeu");
             c = ecouterChar();
             if(c == 'i'){
                 informations();
+            }else if(c == 'b'){
+                boutique();
+            }else if(c == 'j'){
+                jouerArgent();
             }else if(c == 'q'){
                 continuer = false;
             }
-            if(tempsJour == 0){
-                tempsJour = 24;
+            if(jour.getTempsJour() == 0){
                 clear();
-                System.out.println("Encore une journée de finie...");
-                Thread.sleep(5000);
+                System.out.println("Encore une journée de finie...\n");
+                System.out.println(jour);
+                Thread.sleep(2000);
+                jour = new Jour(joueur.getArgent(), joueur);
                 joueur.addNbJours();
             }
         }

@@ -1,4 +1,4 @@
-# Sprint 2
+# Sprint 3
 
 ## Démo + Planification du sprint suivant
 
