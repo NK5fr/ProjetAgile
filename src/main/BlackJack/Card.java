@@ -23,6 +23,10 @@ public class Card {
         return cardValue.cardValue;
     }
 
+    public Value getCardRealValue() {
+        return cardValue;
+    }
+
     public void setCardValue(Value cardValue) {
         this.cardValue = cardValue;
     }
