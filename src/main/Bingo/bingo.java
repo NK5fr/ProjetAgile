@@ -1,8 +1,10 @@
 package main.Bingo;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
+import java.util.Scanner;
 
 import main.App;
 
@@ -24,10 +26,8 @@ public class bingo {
     public static int g5 = 0;
     public static ArrayList<String> tire = new ArrayList<>();
 
-    bingo(){
-    }
 
-    public static void presentation(){
+    /* public static void presentation(){
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .-----------------. .----------------.  .----------------. \n" + //
@@ -43,12 +43,24 @@ public class bingo {
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + //
                 "\n" + //
                 "");
+    } */
+
+    public static void afficherTitre(String nom){
+        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + nom + ".txt");
+        try(Scanner sc = new Scanner(file)){
+            sc.useDelimiter("\n");
+            while(sc.hasNext()){
+                System.out.println(sc.next());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(nom);        
+        }
     }
 
     
     public static void jouer()throws FileNotFoundException {
         clear();
-        presentation();
+        afficherTitre("Bingo");
         create_grille();
         System.out.println();
         System.out.println("Voici ta grille : ");
