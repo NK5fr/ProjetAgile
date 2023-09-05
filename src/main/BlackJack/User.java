@@ -35,8 +35,8 @@ public class User {
         this.userHand = userHand;
     }
 
-    public Score getUserScore() {
-        return userScore;
+    public int getUserScore() {
+        return userScore.getUserScore();
     }
 
     public void setUserScore(Score userScore) {
@@ -72,21 +72,25 @@ public class User {
 
     void calculateScore() {
         Score calculatedScore = new Score();
+        int nbAce = 0;
         for (Card card : this.userHand) {
             if (card.isVisible) {
                 calculatedScore.addValue(card.getCardValue());
+                if (card.getCardRealValue().equals(Value.ACE)) {
+                    nbAce++;
+                }
             }
         }
+        if (calculatedScore.getUserScore() > 21) {
+            calculatedScore.setUserScore(calculatedScore.getUserScore() - (10*nbAce));
+        }
+
         this.setUserScore(calculatedScore);
+
     }
 
     boolean isBusted() {
-        for (Card card : userHand) {
-            if (card.cardValue.equals(Value.ACE)) {
-                
-            }
-        }
-        return this.userScore.isBusted();
+        return this.getUserScore() > 21;
     }
 
     boolean isBlackJack() {
@@ -98,4 +102,5 @@ public class User {
             card.setVisible(true);
         }
     }
+
 }
