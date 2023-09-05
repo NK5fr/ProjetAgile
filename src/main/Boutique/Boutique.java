@@ -38,13 +38,15 @@ public class Boutique {
 
 
 
-        b.afficherBonheur();
+        b.afficherMenu();
         // b.afficherNourriture();
     }
 
     public void afficher(Consommable c, int i){
-        System.out.println(c.effet());
-        System.out.println();
+        // System.out.println(c.effet());
+        System.out.println("_________________________________________________________________________________________\n");
+        System.out.println(i + " | " + c.getNom() + " | " + c.getPrix() + " | " + c.effet());
+        
     }
 
     public void afficherMenu(){
@@ -53,16 +55,21 @@ public class Boutique {
            //this.afficherBoutique();
             System.out.println("Bienvenue dans la Boutique.\n"
             + "Içi, vous pouvez acheter: \n"
-            + "n - De la nourriture, pour vous nourrir"
-            + "b - Des biens divers pour vous rendre heureux");
+            + "n - De la nourriture, pour vous nourrir\n"
+            + "b - Des biens divers pour vous rendre heureux\n");
             car = App.ecouterChar(); 
-        }while(car == 'n' || car == 'b');
+        }while(car != 'n' && car != 'b');
         
         if(car == 'n'){
             this.afficherNourriture();
         }else if(car == 'b'){
             this.afficherBonheur();
         }
+        int choix = 11;
+        do{
+            System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
+        }while(choix<0 && choix>10);
+        
         
     }
 
@@ -74,6 +81,7 @@ public class Boutique {
                 i++;
             }
         }
+        System.out.println("_________________________________________________________________________________________\n");
     }
 
     public void afficherBonheur(){
@@ -84,5 +92,6 @@ public class Boutique {
                 i++;
             }
         }
+        System.out.println("_________________________________________________________________________________________\n");
     }
 }
