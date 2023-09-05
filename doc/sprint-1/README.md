@@ -3,22 +3,25 @@
 ## Démo + Planification du sprint suivant
 
 ### Ce que nous avons fait durant ce sprint
-Idée du jeu
-Répartitions des taches
+Structure du projet  
+Dépot git  
+Systeme de sauvegarde  
+Bases des mini-jeux  
 
 ### Ce que nous allons faire durant le prochain sprint
-Création de la structure du projet
-Début du développement des mini-jeux et de la gestion du joueur.
+Développement des minis jeu  
+Système de récupération des sauvegardes
 
 ## Rétrospective
 
 ### Sur quoi avons nous butté ?
-Nous avons eu des difficultés à trouver un objectif pour le jeu
-Nous avons eu du mal à répartir les tâches
+Structure du projet qu'on a du optimiser pour chaque  
+Récupérer le dépot git pour chaque  
+Développement un peu lent   
 
 ### PDCA
-Nous voulons faire une répartition des taches plus efficace
-Nous pouvons mesurer ça grace au temps pris pour faire la répartion
-Nous voulons mieux analyser le travail à faire pour avoir une meilleure vision des taches à répartir
-Nous allons vérifier notre amélioration avec notre répartition des taches pour le développement
+Nous voulons accelérer le développement  
+Nous pouvons mesurer ça grace au temps pris pour le développement  
+Nous voulons répartir les taches et coder de manière optimisée  
+Nous allons vérifier notre amélioration avec le développement des mini-jeux  
 
