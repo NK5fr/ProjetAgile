@@ -1,29 +1,44 @@
 package main.BlackJack;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class CardDeck {
-    ArrayList<Card> deck;
+    private ArrayList<Card> deck;
 
     CardDeck() {
+        this.deck = new ArrayList<Card>();
         for (int suits = 0; suits < Suits.values().length; suits++) {
-            Suits currentSuit = Suits.CLUB;
             for (int value = 0; value < Value.values().length ; value++) {
-                Value currentValue = Value.ONE;
-                deck.add(new Card(currentSuit, currentValue));
+                deck.add(new Card(Suits.values()[suits], Value.values()[value]));
             }
         }
     }
+
 
     void shuffle() {
         Collections.shuffle(deck);
     }
 
     Card deal() {
-        this.deck.get(0);
-        this.deck.remove(0);
+        return this.deck.remove(0);
     }
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
+    public void setDeck(ArrayList<Card> deck) {
+        this.deck = deck;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder("Remaining cards: \n");
+        for (Card card : this.deck) {
+            str.append(card.toString());
+            str.append("\n");
+        }
+        return str.toString();
+    }
+
 }
