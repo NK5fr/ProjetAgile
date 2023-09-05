@@ -15,7 +15,7 @@ public class User {
         this.denomination = denomination;
     }
 
-    public User(int currentMoney, String denomination) {
+    public User(int currentMoney) {
         this(new ArrayList<Card>(), new Score(), currentMoney, denomination);
     }
 
