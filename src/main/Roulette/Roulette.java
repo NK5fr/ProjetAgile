@@ -1,4 +1,4 @@
-package Roulette;
+package main.Roulette;
 
 import java.util.Random;
 import java.util.Scanner;
