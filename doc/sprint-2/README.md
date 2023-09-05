@@ -3,11 +3,9 @@
 ## Démo + Planification du sprint suivant
 
 ### Ce que nous avons fait durant ce sprint
-Menu de base
-Bingo fonctionnel 
-affichage pour machine a sous bientot fini
-Fini les differentes classes necessaire au BlackJack
-roulette fini
+lotterie
+système de sauvegarde et de chargement
+Avancement dans les autres mini-jeux
 
 ### Ce que nous allons faire durant le prochain sprint
 Développement des minis jeu (hors lotterie)
