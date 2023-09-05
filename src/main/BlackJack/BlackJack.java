@@ -44,6 +44,10 @@ public class BlackJack {
     void dealerDeal() {
         Card deltCard = this.deck.deal();
         this.dealer.addCard(deltCard);
+        if (this.dealer.userHand.size() == 1) {
+            deltCard.setVisible(false);   
+        }
+        this.dealer.calculateScore();
     }    
 
     
@@ -51,19 +55,18 @@ public class BlackJack {
     void startingDeal() {
         this.playerDeal();
         this.dealerDeal();
-        this.dealer.userHand.get(0).setVisible(false);
         this.playerDeal();
         this.dealerDeal();
-        this.player.calculateScore();
-        this.dealer.calculateScore();
     }
 
     void showCards() {
         System.out.println(dealer);
+        System.out.println("\n");
         System.out.println(player);
+        System.out.println("\n");
     }
 
-    void askForChoice() {
+    void askForChoice() throws InterruptedException {
         String choice = "";
         while (!(choice.equals("H")) && !(choice.equals("S"))) {
             System.out.println("H- Hit");
@@ -85,7 +88,7 @@ public class BlackJack {
         }
     }
 
-    void hit() {
+    void hit() throws InterruptedException {
         this.playerDeal();
         if (this.player.userScore.isBusted()) {
             this.gameOver();
@@ -95,21 +98,44 @@ public class BlackJack {
         this.askForChoice();
     }
 
-    void stand() {
-        while (this.dealer.isBusted()) {
+    void stand() throws InterruptedException {
+        this.dealer.setAllCardsVisible();
+        this.dealer.calculateScore();
+        this.showCards();
+        do {
+            Thread.sleep(100);
             this.dealerDeal();
+            this.showCards();
+        } while (this.dealer.getUserScore() < this.player.getUserScore() && !(this.dealer.isBusted()));
+        if (this.dealer.getUserScore() > this.player.getUserScore()) {
+            if (this.dealer.isBusted()) {
+                this.gameWon();
+            } else {
+                this.gameOver();
+            }
         }
-
     }
 
+    
     void gameOver() {
         this.dealer.setAllCardsVisible();
         this.dealer.calculateScore();
         this.showCards();
-        System.out.println("Game Over,\nYour score went over 21\nToo bad!");
+        if (this.player.isBusted()) {
+            System.out.println("Game Over,\nYour score went over 21\nToo bad!");
+        }
+        else {
+            System.out.println("Game Over,\nYour score is inferior to the dealer's\nToo bad!");
+        }
+        scanner.close();
     }
 
-    void startOfGame() {
+    void gameWon() {
+        System.out.println("YOU WON, the dealer busted");
+        scanner.close();
+    }
+
+    void startOfGame() throws InterruptedException {
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" + //
@@ -138,7 +164,7 @@ public class BlackJack {
                 "");
         this.deck.shuffle();
         System.out.println("You currently have "+ this.player.currentMoney+" $ in your account");
-        askForBet();
+        //askForBet();
         startingDeal();
         showCards();
         askForChoice();

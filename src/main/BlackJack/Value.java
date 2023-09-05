@@ -20,4 +20,8 @@ public enum Value {
     Value(int cardValue) {
         this.cardValue = cardValue;
     }
+
+    public void setCardValue(int cardValue) {
+        this.cardValue = cardValue;
+    }
 }
