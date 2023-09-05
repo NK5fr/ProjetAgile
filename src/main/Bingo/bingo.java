@@ -46,7 +46,7 @@ public class bingo {
     } */
 
     public static void afficherTitre(String nom){
-        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + nom + ".txt");
+        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affichage" + File.separator + nom + ".txt");
         try(Scanner sc = new Scanner(file)){
             sc.useDelimiter("\n");
             while(sc.hasNext()){
