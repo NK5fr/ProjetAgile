@@ -30,9 +30,7 @@ public class BlackJack {
     }
 
     void bet(int playerBet) {
-        if (playerBet <= this.player.getCurrentMoney()) {
-            this.bet = playerBet;
-        }
+        this.bet = playerBet;
     }
 
     void playerDeal() {
@@ -86,6 +84,7 @@ public class BlackJack {
             System.out.println("How much will you risk");
             choice = scanner.nextInt();
         }
+        bet(choice);
     }
 
     void hit() throws InterruptedException {

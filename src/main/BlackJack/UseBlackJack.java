@@ -10,7 +10,7 @@ public class UseBlackJack {
             }
         }
         */
-        BlackJack currentGame = new BlackJack(new User(100, "player"));
+        BlackJack currentGame = new BlackJack(new User(100));
         currentGame.startOfGame();
     }
 }
