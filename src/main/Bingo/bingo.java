@@ -23,7 +23,7 @@ public class bingo {
     bingo(){
     }
 
-    public static void jouer() throws InterruptedException{
+    public static void presentation(){
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .-----------------. .----------------.  .----------------. \n" + //
@@ -39,9 +39,75 @@ public class bingo {
                 " '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + //
                 "\n" + //
                 "");
+    }
+
+    
+    public static void jouer() throws InterruptedException{
+        clear();
+        presentation();
+        create_grille();
+        System.out.println();
+        System.out.println("Voici ta grille : ");
+        affichage_grille(grille1);
+        System.out.println("Le jeu commence ! ");
+        lancer();
+        System.out.println();
+        //Indique si on a gagné ou perdu
+        if(!trouve1.contains(false)){
+            System.out.println("Vous avez gagné !");
+        }else{
+            System.out.println("Vous avez perdu...");
+        }
+    }
+
+    public static void lancer() throws InterruptedException{
+        Random r = new Random();
+        String chiffre;
+        while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
+            chiffre = r.nextInt(45) + "";
+            while(tire.contains(chiffre)){
+                chiffre = r.nextInt(45) + "";
+            }
+            tire.add(chiffre + "");
+            Thread.sleep(2000);
+            affichageDé(chiffre);
+            if(grille1.contains(chiffre)){
+                trouve1.set(g1, true);
+                g1++;
+                grille1.set(grille1.indexOf(chiffre), "  ");
+            }
+            if(grille2.contains(chiffre)){
+                trouve2.set(g2, true);
+                g2++;
+            }
+            if(grille3.contains(chiffre)){
+                trouve3.set(g3, true);
+                g3++;
+            }
+            if(grille4.contains(chiffre)){
+                trouve4.set(g4, true);
+                g4++;
+            }
+            if(grille5.contains(chiffre)){
+                trouve5.set(g5, true);
+                g5++;
+            }
+            affichage_grille(grille1);
+            System.out.println();
+            affichage_score();
+        }
+    }
+    
+    public static void affichage_score(){
+        System.out.println("           -------------------------------");
+        System.out.println("JOUEUR     |  J1 |  J2 |  J3 |  J4 |  J5 |");
+        System.out.println("NB RESTANT |  " + (9-g1) + "  |  " + (9-g2) + "  |  " + (9-g3) + "  |  " + (9-g4) + "  |  " + (9-g5) + "  |");
+        System.out.println("           -------------------------------");
+    }
+    
+    public static void create_grille(){
         Random r = new Random();
         String r1;
-        String chiffre;
         //création des cinqs grilles
         for (int i=0; i<9; i++){
             r1 = r.nextInt(45) + "";
@@ -77,54 +143,6 @@ public class bingo {
             trouve3.add(false);
             trouve4.add(false);
             trouve5.add(false);
-        }
-        System.out.println();
-        System.out.println("Voici ta grille : ");
-        affichage_grille(grille1);
-        System.out.println("Le jeu commence ! ");
-        //Répetitions des lancers de dés jusqu'au gagnant
-        while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
-            chiffre = r.nextInt(45) + "";
-            while(tire.contains(chiffre)){
-                chiffre = r.nextInt(45) + "";
-            }
-            tire.add(chiffre + "");
-            Thread.sleep(2000);
-            affichageDé(chiffre);
-            if(grille1.contains(chiffre)){
-                trouve1.set(g1, true);
-                g1++;
-                grille1.set(grille1.indexOf(chiffre), "  ");
-            }
-            if(grille2.contains(chiffre)){
-                trouve2.set(g2, true);
-                g2++;
-            }
-            if(grille3.contains(chiffre)){
-                trouve3.set(g3, true);
-                g3++;
-            }
-            if(grille4.contains(chiffre)){
-                trouve4.set(g4, true);
-                g4++;
-            }
-            if(grille5.contains(chiffre)){
-                trouve5.set(g5, true);
-                g5++;
-            }
-            affichage_grille(grille1);
-            System.out.println();
-            System.out.println("           -------------------------------");
-            System.out.println("JOUEUR     |  J1 |  J2 |  J3 |  J4 |  J5 |");
-            System.out.println("NB RESTANT |  " + (9-g1) + "  |  " + (9-g2) + "  |  " + (9-g3) + "  |  " + (9-g4) + "  |  " + (9-g5) + "  |");
-            System.out.println("           -------------------------------");
-        }
-        System.out.println();
-        //Indique si on a gagné ou perdu
-        if(!trouve1.contains(false)){
-            System.out.println("Vous avez gagné !");
-        }else{
-            System.out.println("Vous avez perdu...");
         }
     }
 
@@ -172,7 +190,6 @@ public class bingo {
     }
     
     public static void main(String[] args) throws InterruptedException {
-        clear();
         jouer();
     }
 }
