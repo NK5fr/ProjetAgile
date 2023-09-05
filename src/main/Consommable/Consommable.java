@@ -14,6 +14,8 @@ public class Consommable {
         return "ceci est un consommable";
     }
 
+    public void achete(){}
+
     public int getPrix() {
         return prix;
     }
