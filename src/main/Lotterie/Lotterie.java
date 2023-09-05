@@ -3,7 +3,8 @@ package main.Lotterie;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
+
+import main.App;
 
 
 public class Lotterie {
@@ -42,17 +43,16 @@ public class Lotterie {
         int boule4 = 0;
         int boule5 = 0;
         int boule6 = 0;
-        Scanner sc = new Scanner(System.in);
         do {
             bon_input = true;
             System.out.println("Entrez les 6 numeros (un par un)");
             
-            boule1 = sc.nextInt();
-            boule2 = sc.nextInt();
-            boule3 = sc.nextInt();
-            boule4 = sc.nextInt();
-            boule5 = sc.nextInt();
-            boule6 = sc.nextInt();
+            boule1 = App.scanner.nextInt();
+            boule2 = App.scanner.nextInt();
+            boule3 = App.scanner.nextInt();
+            boule4 = App.scanner.nextInt();
+            boule5 = App.scanner.nextInt();
+            boule6 = App.scanner.nextInt();
             if(0 < boule1 && boule1 < 46) {
                 bon_input = bon_input && true;
             }
@@ -96,7 +96,6 @@ public class Lotterie {
                 System.out.println("La boule numéro 6 n'est pas comprise entre 1 et 45");
             }
         }while(!bon_input);
-        sc.close();
         this.predictionBoules.add(boule1);
         this.predictionBoules.add(boule2);
         this.predictionBoules.add(boule3);
