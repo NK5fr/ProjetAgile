@@ -1,8 +1,8 @@
 package test.Lotterie;
 
-import main.Lotterie.Lotterie;
-
 import org.junit.jupiter.api.Test;
+
+import main.Lotterie.Lotterie;
 
 import static org.junit.Assert.assertTrue;
 
