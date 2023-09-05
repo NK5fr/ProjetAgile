@@ -3,22 +3,22 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class bingo {
-    static ArrayList grille1 = new ArrayList<>();
-    static ArrayList grille2 = new ArrayList<>();
-    static ArrayList grille3 = new ArrayList<>();
-    static ArrayList grille4 = new ArrayList<>();
-    static ArrayList grille5 = new ArrayList<>();
-    static ArrayList trouve1 = new ArrayList<Boolean>();
-    static ArrayList trouve2 = new ArrayList<Boolean>();
-    static ArrayList trouve3 = new ArrayList<Boolean>();
-    static ArrayList trouve4 = new ArrayList<Boolean>();
-    static ArrayList trouve5 = new ArrayList<Boolean>();
+    static ArrayList<String> grille1 = new ArrayList<>();
+    static ArrayList<String> grille2 = new ArrayList<>();
+    static ArrayList<String> grille3 = new ArrayList<>();
+    static ArrayList<String> grille4 = new ArrayList<>();
+    static ArrayList<String> grille5 = new ArrayList<>();
+    static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
+    static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
+    static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
+    static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
+    static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
     static int g1 = 0;
     static int g2 = 0;
     static int g3 = 0;
     static int g4 = 0;
     static int g5 = 0;
-    static ArrayList tire = new ArrayList<>();
+    static ArrayList<String> tire = new ArrayList<>();
 
     bingo(){
     }
@@ -40,35 +40,35 @@ public class bingo {
                 "\n" + //
                 "");
         Random r = new Random();
-        int r1;
-        int chiffre;
+        String r1;
+        String chiffre;
         //création des cinqs grilles
         for (int i=0; i<9; i++){
-            r1 = r.nextInt(45);
+            r1 = r.nextInt(45) + "";
             while(grille1.contains(r1)){
-                r1 = r.nextInt(45);
+                r1 = r.nextInt(45) + "";
             }
-            grille1.add(r1);
-            r1 = r.nextInt(45);
+            grille1.add(r1 + "");
+            r1 = r.nextInt(45) + "";
             while(grille2.contains(r1)){
-                r1 = r.nextInt(45);
+                r1 = r.nextInt(45) + "";
             }
-            grille2.add(r1);
-            r1 = r.nextInt(45);
+            grille2.add(r1+ "");
+            r1 = r.nextInt(45) + "";
             while(grille3.contains(r1)){
-                r1 = r.nextInt(45);
+                r1 = r.nextInt(45) + "";
             }
-            grille3.add(r1);
-            r1 = r.nextInt(45);
+            grille3.add(r1+ "");
+            r1 = r.nextInt(45) + "";
             while(grille4.contains(r1)){
-                r1 = r.nextInt(45);
+                r1 = r.nextInt(45) + "";
             }
-            grille4.add(r1);
-            r1 = r.nextInt(45);
+            grille4.add(r1+ "");
+            r1 = r.nextInt(45) + "";
             while(grille5.contains(r1)){
-                r1 = r.nextInt(45);
+                r1 = r.nextInt(45) + "";
             }
-            grille5.add(r1);
+            grille5.add(r1 + "");
         }
         //création des cinqs grille de révelation 
         for (int i=0; i<9; i++){
@@ -84,11 +84,11 @@ public class bingo {
         System.out.println("Le jeu commence ! ");
         //Répetitions des lancers de dés jusqu'au gagnant
         while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
-            chiffre = (int)r.nextInt(45);
+            chiffre = r.nextInt(45) + "";
             while(tire.contains(chiffre)){
-                chiffre = (int)r.nextInt(45);
+                chiffre = r.nextInt(45) + "";
             }
-            tire.add(chiffre);
+            tire.add(chiffre + "");
             Thread.sleep(2000);
             affichageDé(chiffre);
             if(grille1.contains(chiffre)){
@@ -128,7 +128,7 @@ public class bingo {
         }
     }
 
-    static void affichage_grille(ArrayList grille){
+    static void affichage_grille(ArrayList<String> grille){
         System.out.println();
         for (int i=0; i<8; i++){
             System.out.print((" -"));
@@ -152,7 +152,7 @@ public class bingo {
         System.out.println();
     }
 
-    static void affichageDé(int chiffre){
+    static void affichageDé(String chiffre){
         for (int i=0; i<3; i++){
             System.out.print(("-"));
         }
@@ -162,9 +162,17 @@ public class bingo {
             System.out.print(("-"));
         }
     }
+
+    public static void clear()
+    {
+        final String ESC = "\033[";
+        System.out.print (ESC + "2J");
+        System.out.print (ESC + "0;0H");
+        System.out.flush();
+    }
     
     public static void main(String[] args) throws InterruptedException {
-        affichageDé(1);
+        clear();
         jouer();
     }
 }
