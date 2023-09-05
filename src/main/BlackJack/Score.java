@@ -1,7 +1,7 @@
 package main.BlackJack;
 
 public class Score {
-    int userScore;
+    private int userScore;
 
 
     Score() {
@@ -12,11 +12,24 @@ public class Score {
         this.userScore = userScore;
     }
 
-    boolean busted() {
+    boolean isBusted() {
         return this.userScore > 21;
     }
 
-    boolean blackJack() {
+    boolean isBlackJack() {
         return this.userScore == 21;
     }
+
+    void addValue(int cardValue) {
+        this.userScore += cardValue;
+    }
+
+    public int getUserScore() {
+        return userScore;
+    }
+
+    public void setUserScore(int userScore) {
+        this.userScore = userScore;
+    }
+    
 }
