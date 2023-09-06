@@ -7,7 +7,7 @@ public class BlackJack {
     public Scanner scanner = new Scanner(System.in);
 
     
-    User player;
+    public User player;
     User dealer;
     int bet;
     CardDeck deck;
@@ -163,7 +163,7 @@ public class BlackJack {
                 "");
         this.deck.shuffle();
         System.out.println("You currently have "+ this.player.currentMoney+" $ in your account");
-        //askForBet();
+        askForBet();
         startingDeal();
         showCards();
         askForChoice();

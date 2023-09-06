@@ -78,7 +78,7 @@ public class App {
         System.out.flush();
 	}
 
-    private static char ecouterChar(){
+    public static char ecouterChar(){
         System.out.print("Veuillez entrer 1 caractère : ");
         String c = scanner.next();
         while(c.length() != 1){

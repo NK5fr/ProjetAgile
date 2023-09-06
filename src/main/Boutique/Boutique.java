@@ -3,6 +3,7 @@ package main.Boutique;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.App;
 import main.Consommable.*;
 
 public class Boutique {
@@ -31,39 +32,66 @@ public class Boutique {
         Boutique b = new Boutique();
         b.initialiserConsommable();
 
-        for(Consommable c: b.consommables){
-            b.afficher(c);
-        }
+        // for(Consommable c: b.consommables){
+        //     b.afficher(c);
+        // }
 
-        b.afficherBonheur();
-        b.afficherNourriture();
+
+
+        b.afficherMenu();
+        // b.afficherNourriture();
     }
 
-    public void afficher(Consommable c){
-        System.out.println(c.effet());
+    public void afficher(Consommable c, int i){
+        // System.out.println(c.effet());
+        System.out.println("_________________________________________________________________________________________\n");
+        System.out.println(i + " | " + c.getNom() + " | " + c.getPrix() + " | " + c.effet());
+        
+    }
+
+    public void afficherMenu(){
+        char car;
+        do{
+           //this.afficherBoutique();
+            System.out.println("Bienvenue dans la Boutique.\n"
+            + "Içi, vous pouvez acheter: \n"
+            + "n - De la nourriture, pour vous nourrir\n"
+            + "b - Des biens divers pour vous rendre heureux\n");
+            car = App.ecouterChar(); 
+        }while(car != 'n' && car != 'b');
+        
+        if(car == 'n'){
+            this.afficherNourriture();
+        }else if(car == 'b'){
+            this.afficherBonheur();
+        }
+        int choix = 11;
+        do{
+            System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
+        }while(choix<0 && choix>10);
+        
+        
     }
 
     public void afficherNourriture(){
-        List<Consommable> n = new ArrayList<Consommable>();
+        int i = 0;
         for(Consommable c: this.consommables){
             if(c instanceof Nourriture){
-                n.add(c);
+                this.afficher(c,i);
+                i++;
             }
         }
-        for(Consommable c: n){
-            this.afficher(c);
-        }
+        System.out.println("_________________________________________________________________________________________\n");
     }
 
     public void afficherBonheur(){
-        List<Consommable> n = new ArrayList<Consommable>();
+        int i = 0;
         for(Consommable c: this.consommables){
             if(c instanceof Bonheur){
-                n.add(c);
+                this.afficher(c,i);
+                i++;
             }
         }
-        for(Consommable c: n){
-            this.afficher(c);
-        }
+        System.out.println("_________________________________________________________________________________________\n");
     }
 }
