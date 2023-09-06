@@ -17,9 +17,16 @@ public class Consommable {
         return "ceci est un " + nom + " qui coute " + prix;
     }
 
-    public void achete(){
+    public boolean achete(){
+        
         int argent_restant = App.joueur.getArgent() - prix;
-        App.joueur.setArgent(argent_restant);
+        if(argent_restant >= 0){
+           App.joueur.setArgent(argent_restant); 
+           return true;
+        }else{
+            System.out.println("tu n'as pas assez d'argent le pauvre");
+        }
+        return false;
     }
 
     public int getPrix() {

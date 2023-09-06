@@ -161,8 +161,4 @@ public class App {
         }
         Thread.sleep(3000);
     }
-
-    public static void setJoueur(Joueur joueur) {
-        App.joueur = joueur;
-    }
 }

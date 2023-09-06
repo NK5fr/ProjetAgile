@@ -16,10 +16,14 @@ public class Nourriture extends Consommable{
         return "Ceci est un " + this.getNom() + " qui coute " + getPrix() + " pour gagner " + faim +" point de nourriture.";
     }
 
-    public void achete(){
-        super.achete();
-        int nouv_faim = App.joueur.getNourriture() + faim;
-        App.joueur.setNourriture(nouv_faim);
+    public boolean achete(){
+        if(super.achete()){
+            int nouv_faim = App.joueur.getNourriture() + faim;
+            App.joueur.setNourriture(nouv_faim);
+            return true;
+        }
+        return false;
+        
     }
 
 }
