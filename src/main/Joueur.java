@@ -62,9 +62,6 @@ public class Joueur {
 
     public void setArgent(int argent) {
         this.argent = argent;
-        if(this.argent < 0){
-            this.argent = 0;
-        }
     }
 
     public int getBonheur() {

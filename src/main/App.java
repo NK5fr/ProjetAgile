@@ -132,12 +132,12 @@ public class App {
             joueur.sauvegarder();
             clear();
             System.out.println("Partie sauvegardée !! On espère te revoir.");
-        }else if(joueur.getNourriture() > 0){
+        }else if(joueur.getNourriture() <= 0){
             clear();
             System.out.println("GAME OVER !!! Vous n'avez pas mangé depuis trop longtemps");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
-        }else if(joueur.getArgent() > 0){
+        }else if(joueur.getArgent() < 0){
             clear();
             System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
