@@ -91,6 +91,7 @@ public class App {
                     Thread.sleep(5000);
                 }else{
                     b.jouer(); 
+                    jour.getJeuxDuJour().add(b);
                 }           
             }else if(c == 'j'){
                 BlackJack bj = new BlackJack(joueur);
@@ -103,6 +104,8 @@ public class App {
                 }else{
                     try {
                         bj.jouer();
+                        jour.getJeuxDuJour().add(bj);
+
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -116,7 +119,8 @@ public class App {
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
                 }else{
-                    r.jouer(); 
+                    r.jouer();
+                    jour.getJeuxDuJour().add(r);
                 }               
             }else if(c == 'm'){
                 Machine_a_sous m = new Machine_a_sous();
@@ -128,6 +132,7 @@ public class App {
                     Thread.sleep(5000);
                 }else{
                     m.jouer();  
+                    jour.getJeuxDuJour().add(m);
                 }                
             }else if(c == 'l'){
                 Jeu l = new Lotterie();
@@ -140,6 +145,7 @@ public class App {
                 }else{
                     try {
                         l.jouer();
+                        jour.getJeuxDuJour().add(l);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } 

@@ -24,6 +24,12 @@ public class Jour {
         this.tempsJour -= tempsJour;
     }
 
+    
+
+    public List<Jeu> getJeuxDuJour() {
+        return jeuxDuJour;
+    }
+
     public String toString(){
         String res = "Jeu(x) du jour :\n";
         for(Jeu j : jeuxDuJour){
