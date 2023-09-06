@@ -66,7 +66,7 @@ public class bingo implements Jeu{
     }
     
     public void jouer() {
-        clear();
+        //clear();
         App.joueur.setArgent(App.joueur.getArgent() - 20);
         afficherTitre("Bingo");
         create_grille();
@@ -149,7 +149,7 @@ public class bingo implements Jeu{
             }else{
                 System.out.println();
                 System.out.println("Vous avez été surpris en train de tricher ! ");
-                System.out.println("Vous vous faites éjecter du casino et payer une amende de 100e.");
+                System.out.println("Vous vous faites éjecter du casino et payer une amende de 100 €.");
                 App.joueur.setArgent(App.joueur.getArgent() - 100);
                 break;
             }
