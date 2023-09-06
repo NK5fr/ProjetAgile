@@ -17,6 +17,7 @@ public class Lotterie implements Jeu{
 
     private static int nb_trouver = 0;
     private static int max_boules = 45;
+    private static int ammende = 10_000;
     private final static int PRIX = 1_000_000;
     private final static int PRIX_TICKET = 1_000;
     private final static int DUREE = 2;
@@ -139,6 +140,11 @@ public class Lotterie implements Jeu{
 
     @Override
     public void tricher() {
+        if (RAND.nextInt(4) == 1) {
+            System.out.println("Vous êtes fait attraper Vous devez payez " + Lotterie.ammende + "€");
+            App.joueur.setArgent(App.joueur.getArgent() - Lotterie.ammende);
+            defaite();
+        }
         Lotterie.setMax_boules(25);
     }
 
