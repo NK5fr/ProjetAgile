@@ -66,16 +66,7 @@ public class User {
         return this.denomination;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder(this.denomination + "\n");
-        for (Card card : this.userHand) {
-            str.append("\t"+ card.toString() + "\n");
-        }
-        str.append(this.userScore.getUserScore());
-        
-        return str.toString();
-    }
+    
 
     void calculateScore() {
         Score calculatedScore = new Score();
@@ -118,7 +109,7 @@ public class User {
     boolean hasFigure() {
         for (Card card : this.getUserHand()) {
             if (card.getCardRealValue().equals(Value.DIX) || card.getCardRealValue().equals(Value.VALLET) || 
-            card.getCardRealValue().equals(Value.REINE) || card.getCardRealValue().equals(Value.ROI)){
+            card.getCardRealValue().equals(Value.DAME) || card.getCardRealValue().equals(Value.ROI)){
                 return true;
             }
         }
@@ -132,4 +123,13 @@ public class User {
         return false;
     }
 
+
+    @Override
+    public String toString() {
+        Visual v = new Visual();
+        String result = this.getDenomination() + " - " + this.getUserScore();
+        return result + "\n" + v.assembleCards(userHand);
+    }
+
+    
 }

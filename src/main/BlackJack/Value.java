@@ -11,7 +11,7 @@ public enum Value {
     NEUF(9), 
     DIX(10), 
     VALLET(10), 
-    REINE(10), 
+    DAME(10), 
     ROI(10), 
     AS(11);
 

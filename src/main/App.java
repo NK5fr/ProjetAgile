@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 import main.Bingo.bingo;
 import main.Boutique.Boutique;
+import main.BlackJack.BlackJack;
 import main.Lotterie.Lotterie;
 import main.Machine_a_sous.Machine_a_sous;
 import main.Roulette.Colors;
@@ -68,7 +69,7 @@ public class App {
         while(continuer){
             clear();
             System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
-            System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
+            System.out.println("Argent -> " + joueur.getArgent() + "€");
             System.out.println("Jeux possibles :");
             System.out.println();
             bingo.afficherTitre("Presentation");
@@ -92,7 +93,12 @@ public class App {
                     b.jouer(); 
                 }           
             }else if(c == 'j'){
-                
+                BlackJack bj = new BlackJack(joueur);
+                try {
+                    bj.jouer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }else if(c == 'r'){
                 Roulette r = new Roulette();
                 if(jour.getTempsJour() - r.duree() < 0){
