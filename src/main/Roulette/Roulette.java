@@ -71,54 +71,54 @@ public class Roulette implements Jeu{
     public static int Gain(){
         if(pari.equals("noir")){
             if(black.contains(resultat)){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("rouge")){
             if(red.contains(resultat)){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("pair")){
             if(resultat % 2 == 0){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("impair")){
             if(resultat % 2 != 0){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("moitie1")){
             if(resultat > 0 && resultat < 19){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("moitie2")){
             if(resultat > 18 && resultat < 37){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("colonne1")){
             if(resultat % 3 == 1){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("colonne2")){
             if(resultat % 3 == 2){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("colonne3")){
             if(resultat % 3 == 0){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers1")){
             if(resultat > 0 && resultat < 13){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers2")){
             if(resultat > 12 && resultat < 25){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers3")){
             if(resultat > 24 && resultat < 37){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(Integer.parseInt(pari) == resultat){
-            return argentParier * 35;
+            return argentParier * 36;
         }
         return 0;
     }
