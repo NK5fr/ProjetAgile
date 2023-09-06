@@ -1,5 +1,9 @@
 package main.BlackJack;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import main.App;
@@ -7,6 +11,22 @@ import main.Jeu;
 import main.Joueur;
 
 public class BlackJack implements Jeu{
+
+    private static Map<String,Value> convertValues = new HashMap<>() {{
+        put("2", Value.DEUX);
+        put("3", Value.TROIS);
+        put("4", Value.QUATRE);
+        put("5", Value.FIVE);
+        put("6", Value.SIX);
+        put("7", Value.SEPT);
+        put("8", Value.HUIT);
+        put("9", Value.NEUF);
+        put("10", Value.DIX);
+        put("V", Value.VALLET);
+        put("D", Value.DAME);
+        put("R", Value.ROI);
+        put("A", Value.AS);
+    }};
 
     private static final int DUREE = 2;
 
@@ -80,15 +100,18 @@ public class BlackJack implements Jeu{
 
     void askForChoice() throws InterruptedException {
         String choice = "";
-        while (!(choice.equals("T")) && !(choice.equals("R"))) {
+        while (!(choice.equals("T")) && !(choice.equals("R")) && (!choice.equals("C"))) {
             System.out.println("T- Tirer");
             System.out.println("R- Rester");
+                System.out.println("C- Tricher");
             choice = scanner.next().toUpperCase();
         }
         if (choice.equals("T")) {
             this.hit();
         } else if (choice.equals("R")) {
             this.stand();
+        } else if (choice.equals("C")) {
+            this.tricher();
         }
     }
 
@@ -163,7 +186,7 @@ public class BlackJack implements Jeu{
                 "\n" + //
                 "");
         this.deck.shuffle();
-        System.out.println("Vous avez "+ this.player.currentMoney+" € dans votre compte banquaire");
+        System.out.println("Vous avez "+ this.player.currentMoney+" € dans votre compte bancaire");
         askForBet();
         App.clear();
         startingDeal();
@@ -213,7 +236,79 @@ public class BlackJack implements Jeu{
 
     @Override
     public void tricher() {
-        throw new UnsupportedOperationException("Unimplemented method 'tricher'");
+        Visual v = new Visual();
+        App.clear();
+        System.out.println();
+        String choice = "";
+        while (!(choice.equals("1")) && !(choice.equals("2"))) {
+            System.out.println("Quel carte voulez-vous remplacer (parmi les deux premières)?");
+            System.out.println(v.assembleCards(this.player.userHand));
+            choice = scanner.next().toUpperCase();
+        }
+        switch (choice) {
+            case "1":
+                this.changerCarte(this.player.getUserHand().get(0));
+                break;
+            case "2":
+                this.changerCarte(this.player.getUserHand().get(1));
+                break;
+        }
+    }
+
+    private void changerCarte(Card card) {
+        App.clear();
+        Visual v = new Visual();
+        System.out.println(v.cardVisual(card));
+        ArrayList<String> validList = new ArrayList<>() {{
+            add("2");
+            add("3");
+            add("4");
+            add("5");
+            add("6");
+            add("7");
+            add("8");
+            add("9");
+            add("10");
+            add("V");
+            add("D");
+            add("R");
+            add("A");
+        }};
+        String choice = "";
+        while (!(validList.contains(choice))) {
+            System.out.println("En quelle carte voulez-vous la transformer?\n");
+            System.out.println("(pour un chiffre, mettez le chiffre, sinon l'initiale de la carte)");
+            choice = scanner.next().toUpperCase();
+        }
+        card.setCardValue(convertValues.get(choice));
+        this.player.calculateScore();
+        this.showCards();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        Random r = new Random();
+        
+        int trouvé = r.nextInt(2);
+        if (trouvé == 1) {
+            System.out.println("PROBLEME");
+            this.foundOut();
+        } else {
+            try {
+            this.askForChoice();
+            } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        }
     }
 
     @Override
@@ -236,7 +331,7 @@ public class BlackJack implements Jeu{
         System.out.println("TU AS GAGNER, le dealer a crever \n(c'est le terme technique, il n'est pas mort mais ça veux dire qu'il dépasser les 21 points)");
         payOut(false);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -259,10 +354,11 @@ public class BlackJack implements Jeu{
             System.out.println("Game Over,\nLe dealer a un score plus élevé que le tiens\nPas de chance!");
         }
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        App.joueur.setArgent(App.joueur.getArgent()-this.bet);
         App.joueur.setBonheur(App.joueur.getBonheur() - 10);
     }
 
@@ -276,4 +372,14 @@ public class BlackJack implements Jeu{
     public int duree() {
         return BlackJack.DUREE;
     }
+
+    void foundOut() {
+        App.clear();
+        System.out.println("On a découvert que vous avez tricher! Le croupier vous a ejecté violemment du casino\n");
+        System.out.println("Et les témoins de votre triche vous ont frappé dans les rues juste devant le casino");
+        App.joueur.setArgent(App.joueur.getArgent()-this.bet);
+        App.joueur.setArgent(App.joueur.getArgent()-50);
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
+    }
+
 }
