@@ -48,6 +48,7 @@ public class App {
         char c;
         while(continuer){
             clear();
+            System.out.println("Argent - " + joueur.getArgent() + "€\n");
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
