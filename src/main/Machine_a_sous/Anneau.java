@@ -8,9 +8,9 @@ public class Anneau {
 
     private boolean rolling;
     private int idx;
-    protected final static int SPEED = 200;
+    protected static int speed = 200;
     private final static List<Character> SYMBOLES = new LinkedList<>();
-    private final static Random RAND = new Random();
+    protected final static Random RAND = new Random();
 
     public Anneau() {
         this.rolling = true;
@@ -21,6 +21,8 @@ public class Anneau {
         SYMBOLES.add('♪');
         SYMBOLES.add('☻');
     }
+
+    
 
     public void roll() {
         if (rolling) {
@@ -48,6 +50,13 @@ public class Anneau {
     public int getIdx() {
         return idx;
     }
+
+
+    public static void setSpeed(int speed) {
+        Anneau.speed = speed;
+    }
+
+
 
     
     

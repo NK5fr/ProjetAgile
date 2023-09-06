@@ -16,6 +16,7 @@ public class Machine_a_sous implements Jeu{
     public static String rep;
     private final static int DUREE = 4;
     private final static int prix = 10;
+    private final static int frais_medic = 250;
 
     public Machine_a_sous() {
         this.machine = Arrays.asList(new Anneau(),new Anneau(),new Anneau());
@@ -50,15 +51,46 @@ public class Machine_a_sous implements Jeu{
 
     @Override
     public void tricher() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tricher'");
+        if (Anneau.RAND.nextInt(4) == 2) {
+            System.out.println("Vous êtes pris la mains dans le sac. Le gérant vous envoi ses gros bras\nVous perder " + Machine_a_sous.frais_medic + "€");
+            App.joueur.setArgent(App.joueur.getArgent() - Machine_a_sous.frais_medic);
+            this.defaite();
+            return;
+        }
+        System.out.println("Vous avez baisser le voltage de la machine les anneaux tourne moins vite");
+        Anneau.setSpeed(1000);
     }
 
     @Override
     public void jouer() {
-        Machine_a_sous m = new Machine_a_sous();
+        char c;
         boolean continuer = true;
-        
+        Machine_a_sous m = new Machine_a_sous();
+        continuer = true;
+        while(continuer){
+            App.clear();
+            System.out.println("Voulez vous entrez le prix de la machine est " + Machine_a_sous.prix +"€ (o/n)");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                App.joueur.setArgent(App.joueur.getArgent() - Machine_a_sous.prix);
+                continuer = false;
+            }else if (c =='n') {
+                return;
+            }
+        }
+        continuer = true;
+        while(continuer){
+            App.clear();
+            System.out.println("Voulez vous tricher (o/n)");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                this.tricher();
+                System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
+                continuer = false;
+            }else if (c =='n') {
+                continuer = false;
+            }
+        }
         bingo.afficherTitre("MAS");
  
         while (continuer) {
@@ -73,7 +105,7 @@ public class Machine_a_sous implements Jeu{
                 continuer = false;
             }
             try {
-                Thread.sleep(Anneau.SPEED);
+                Thread.sleep(Anneau.speed);
             } catch (Exception ignored) {}
             
             
@@ -99,15 +131,21 @@ public class Machine_a_sous implements Jeu{
         }else if (this.machine.get(0).getIdx() == 4) {
             récompense = (int) (Machine_a_sous.prix * 3);
         }
-        System.out.println("Bravo vous avez gagner " +récompense*0.25 +"€");
+        System.out.println("Bravo vous avez gagner " +récompense+"€");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
-        App.joueur.setArgent(App.joueur.getArgent() + ((int) (argent*0.25)));
+        App.joueur.setArgent(App.joueur.getArgent() + récompense);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
     }
 
     @Override
     public void defaite() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'defaite'");
+        System.out.println("Dommage vous avez perdu");
+        System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
     }
 
     @Override
@@ -119,4 +157,5 @@ public class Machine_a_sous implements Jeu{
     public int duree() {
         return Machine_a_sous.DUREE;
     }
+
 }
