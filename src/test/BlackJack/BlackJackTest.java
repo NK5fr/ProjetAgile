@@ -3,6 +3,7 @@ package test.BlackJack;
 import org.junit.jupiter.api.Test;
 
 import main.BlackJack.BlackJack;
+import main.BlackJack.User;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,8 +14,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 
-public class BlackJack {
-    BlackJack b = new BlackJack(new User(100));
+public class BlackJackTest {
+    BlackJack b;
 
     @BeforeAll
     public static void beforeAllTests() {
@@ -38,7 +39,8 @@ public class BlackJack {
 
     @Test
     public void startingDealTest() {
-        assertEquals(u.);;
+        assertEquals(0, b.player.getUserScore());
+        
     }
     
 }
