@@ -21,30 +21,30 @@ public class Boutique {
 
     public void initialiserConsommable(){
 
-        this.consommables.add(new Nourriture(1,1,"Terre"));
-        this.consommables.add(new Nourriture(5,5,"Legume"));
-        this.consommables.add(new Nourriture(7,10,"Pomme de terre"));
-        this.consommables.add(new Nourriture(10,15,"Pizza"));
-        this.consommables.add(new Nourriture(15,20,"Sushi"));
-        this.consommables.add(new Nourriture(18,25,"Steak"));
-        this.consommables.add(new Nourriture(22,30,"Kebab"));
-        this.consommables.add(new Nourriture(26,40,"Tacos"));
-        this.consommables.add(new Nourriture(30,50,"Raclette"));
-        this.consommables.add(new Nourriture(5,500,"caviar"));
+        this.consommables.add(new Nourriture(10,50,"Terre"));
+        this.consommables.add(new Nourriture(20,100,"Legume"));
+        this.consommables.add(new Nourriture(30,150,"Pomme de terre"));
+        this.consommables.add(new Nourriture(40,250,"Pizza"));
+        this.consommables.add(new Nourriture(50,350,"Sushi"));
+        this.consommables.add(new Nourriture(60,450,"Steak"));
+        this.consommables.add(new Nourriture(70,650,"Kebab"));
+        this.consommables.add(new Nourriture(80,850,"Tacos"));
+        this.consommables.add(new Nourriture(90,1050,"Raclette"));
+        this.consommables.add(new Nourriture(100,1500,"caviar"));
         
         
         
 
-        this.consommables.add(new Bonheur(10,5,"Vetement"));
-        this.consommables.add(new Bonheur(30,7000,"Jeux"));
-        this.consommables.add(new Bonheur(15,100,"Voiture"));
-        this.consommables.add(new Bonheur(20,1000,"Maison"));
-        this.consommables.add(new Bonheur(25,10000,"Femme"));
-        this.consommables.add(new Bonheur(30,7000,"Enfant"));
-        this.consommables.add(new Bonheur(30,7000,"Voiture de luxe"));
-        this.consommables.add(new Bonheur(30,7000,"Bateau"));
-        this.consommables.add(new Bonheur(30,7000,"Avion"));
-        this.consommables.add(new Bonheur(30,7000,"Lune"));
+        this.consommables.add(new Bonheur(10,50,"Vetement"));
+        this.consommables.add(new Bonheur(20,100,"Jeux"));
+        this.consommables.add(new Bonheur(30,150,"Voiture"));
+        this.consommables.add(new Bonheur(40,250,"Maison"));
+        this.consommables.add(new Bonheur(50,350,"Femme"));
+        this.consommables.add(new Bonheur(60,450,"Enfant"));
+        this.consommables.add(new Bonheur(70,650,"Voiture de luxe"));
+        this.consommables.add(new Bonheur(80,850,"Bateau"));
+        this.consommables.add(new Bonheur(90,1050,"Avion"));
+        this.consommables.add(new Bonheur(100,1500,"Lune"));
     }
 
     public static void main(String[] args){
