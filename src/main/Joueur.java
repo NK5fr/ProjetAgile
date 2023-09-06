@@ -27,7 +27,7 @@ public class Joueur {
     }
 
     public void jourPasse(){
-        this.nourriture -= 10 + 10 * (1 - this.bonheur/100) * 2;
+        this.nourriture -= 10 + Math.ceil(10 * (1 - this.bonheur/100.0) * 4);
         this.bonheur -= 10;
     }
 

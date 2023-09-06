@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 
+
+
 import java.io.File;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -41,6 +43,26 @@ public class JoueurTest {
         assertTrue(90 == j1.getNourriture());
         assertTrue(80 == j1.getBonheur());
         assertTrue(8 == j1.getNbJours());
+    }
+
+    @Test
+    public void testJourPasse(){
+        j1.setBonheur(100);
+        j1.setNourriture(100);
+        j1.jourPasse();
+        assertTrue(j1.getBonheur() == 90);
+        assertTrue(j1.getNourriture() == 90);
+        j1.jourPasse();
+        assertTrue(j1.getBonheur() == 80);
+        assertTrue(j1.getNourriture() == 76);
+    }
+
+    @Test
+    public void testAddNbJours(){
+        j1.setNbJours(1);
+        j1.addNbJours();
+        j1.addNbJours();
+        assertTrue(3 == j1.getNbJours());
     }
 }
 
