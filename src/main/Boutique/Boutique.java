@@ -100,7 +100,10 @@ public class Boutique {
                     System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
                     choix = App.scanner.nextInt();
                 }while(choix<0 && choix>20);
-                this.acheterTout(choix);
+                if(choix != 0){
+                    this.acheterTout(choix);
+                }
+                
 
             }else{
                 if(car == 'n'){
@@ -114,9 +117,15 @@ public class Boutique {
                     choix = App.scanner.nextInt();
                 }while(choix<0 && choix>10);
                 if(car == 'n'){
-                    this.acheterNourriture(choix);
+                    if(choix != 0){
+                        this.acheterNourriture(choix);
+                    }
+                    
                 }else if(car == 'b'){
-                    this.acheterBonheur(choix);
+                    if(choix != 0){
+                        this.acheterBonheur(choix);
+                    }
+                    
                 }
             }
         }while(choix != 0);
@@ -184,5 +193,6 @@ public class Boutique {
             this.afficher(c, i);
             i++;
         }
+        System.out.println("_________________________________________________________________________________________\n");
     }
 }
