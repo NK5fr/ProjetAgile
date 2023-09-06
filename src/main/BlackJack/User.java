@@ -2,6 +2,8 @@ package main.BlackJack;
 
 import java.util.ArrayList;
 
+import main.Joueur;
+
 public class User {
     ArrayList<Card> userHand;
     Score userScore;
@@ -13,6 +15,11 @@ public class User {
         this.userScore = userScore;
         this.currentMoney = currentMoney;
         this.denomination = denomination;
+    }
+
+
+    public User(Joueur j) {
+        this(j.getArgent(), j.getNom());
     }
 
     public User(int currentMoney, String denomination) {

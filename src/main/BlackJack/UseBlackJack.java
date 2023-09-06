@@ -1,8 +1,10 @@
 package main.BlackJack;
 
+import main.App;
+
 public class UseBlackJack {
     public static void main(String[] args) throws InterruptedException {
-        BlackJack currentGame = new BlackJack(new User(100, "player"));
+        BlackJack currentGame = new BlackJack(App.joueur);
         currentGame.jouer();
     }
 }

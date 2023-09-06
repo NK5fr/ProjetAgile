@@ -31,6 +31,10 @@ public class BlackJack implements Jeu{
         this(user, new CardDeck(), new User(), 0);
     }
 
+    public BlackJack(Joueur j) {
+        this(new User(j));
+    }
+
     public BlackJack() {
         this(new User());
     }
@@ -129,8 +133,7 @@ public class BlackJack implements Jeu{
         this.player.setCurrentMoney(this.player.getCurrentMoney()*2);
     }
 
-    public void startOfGame(Joueur j) throws InterruptedException {
-        toUserFromJoueur(j);
+    public void startOfGame() throws InterruptedException {
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" + //
@@ -163,11 +166,6 @@ public class BlackJack implements Jeu{
         startingDeal();
         showCards();
         askForChoice();
-    }
-
-    void toUserFromJoueur(Joueur j) {
-        User user = new User(j.getArgent(), j.getNom());
-        this.setPlayer(user);
     }
 
     public Scanner getScanner() {
@@ -217,7 +215,7 @@ public class BlackJack implements Jeu{
 
     @Override
     public void jouer() throws InterruptedException {
-        this.startOfGame(App.joueur);
+        this.startOfGame();
     }
 
     @Override
