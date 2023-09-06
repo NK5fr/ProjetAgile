@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
@@ -116,13 +121,42 @@ public class App {
     public static void saveClassement(){
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(CLASSEMENT, true))){
             bw.write(joueur.getNom());
-            bw.write(joueur.getNbJours());
+            bw.newLine();
+            bw.write("" + joueur.getNbJours());
             bw.newLine();
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void classement(){
+        clear();
+        List<String> players = new ArrayList<>();
+        List<Integer> scores = new ArrayList<>();
+        String name;
+        Integer score;
+        try(Scanner scan = new Scanner(CLASSEMENT)){
+            scan.useDelimiter("\n");
+            while(scan.hasNext()){
+                players.add(scan.next());
+                scores.add(Integer.valueOf(scan.next()));
+            }
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        Integer max;
+        int idxMax;
+        for(int i = 1; i <= 10; i++){
+            max = Collections.max(scores);
+            idxMax = scores.indexOf(max);
+            System.out.println("N°" + i + " : " + players.get(idxMax) + " avec un score de " + scores.get(idxMax));
+            players.remove(idxMax);
+            scores.remove(idxMax);
+        }
+        System.out.print("Entrez un caractère pour quitter : ");
+        scanner.next();
     }
 
     public static void main(String[] args) throws Exception {
@@ -138,6 +172,7 @@ public class App {
             System.out.println("- la commande b affiche la boutique");
             System.out.println("- la commande j permet de jouer aux jeux d'argent");
             System.out.println("- la commande p permet de passer le temps");
+            System.out.println("- la commande c permet d'afficher le classement des joueurs");
             System.out.println("- la commande q permet de quitter le jeu");
             c = ecouterChar();
             if(c == 'i'){
@@ -148,6 +183,8 @@ public class App {
                 jouerArgent();
             }else if(c == 'p'){
                 jour.setTempsJour(0);
+            }else if(c == 'c'){
+                classement();
             }else if(c == 'q'){
                 continuer = false;
             }
