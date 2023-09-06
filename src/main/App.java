@@ -199,9 +199,13 @@ public class App {
         }catch(FileNotFoundException e){
             e.printStackTrace();
         }
+        int nbJoueurs = players.size();
+        if(nbJoueurs > 10){
+            nbJoueurs = 10;
+        }
         Integer max;
         int idxMax;
-        for(int i = 1; i <= 10; i++){
+        for(int i = 1; i <= nbJoueurs; i++){
             max = Collections.max(scores);
             idxMax = scores.indexOf(max);
             System.out.println("N°" + i + " : " + players.get(idxMax) + " avec un score de " + scores.get(idxMax));
