@@ -2,7 +2,13 @@ package main.BlackJack;
 
 import java.util.Scanner;
 
-public class BlackJack {
+import main.App;
+import main.Jeu;
+import main.Joueur;
+
+public class BlackJack implements Jeu{
+
+    private static final int DUREE = 4;
 
     public Scanner scanner = new Scanner(System.in);
 
@@ -55,6 +61,10 @@ public class BlackJack {
         this.dealerDeal();
         this.playerDeal();
         this.dealerDeal();
+        if (this.player.hasBlackJack()) {
+            this.victoire();
+        }
+
     }
 
     void showCards() {
@@ -81,23 +91,22 @@ public class BlackJack {
     void askForBet() {
         int choice = 0;
         while (choice > this.player.currentMoney || choice <= 0) {
-            System.out.println("Combien allez-vous risquer");
+            System.out.println("Combien allez-vous risquer?");
             choice = scanner.nextInt();
         }
         bet(choice);
     }
 
-    public boolean hit() throws InterruptedException {
+    public void hit() throws InterruptedException {
         this.playerDeal();
         if (this.player.userScore.isBusted()) {
-            return this.gameOver();
+            this.defaite();
         }
         this.showCards();
         this.askForChoice();
-        return true;
     }
 
-    public boolean stand() throws InterruptedException {
+    public void stand() throws InterruptedException {
         this.dealer.setAllCardsVisible();
         this.dealer.calculateScore();
         this.showCards();
@@ -107,34 +116,21 @@ public class BlackJack {
             this.showCards();
         } while (this.dealer.getUserScore() < this.player.getUserScore() && !(this.dealer.isBusted()));
         if (this.dealer.isBusted()) {
-            return this.gameWon();
+            this.victoire();
         } else {
-            return this.gameOver();
+            this.defaite();
         }
     }
 
-    
-    boolean gameOver() {
-        this.dealer.setAllCardsVisible();
-        this.dealer.calculateScore();
-        this.showCards();
-        if (this.player.isBusted()) {
-            System.out.println("Game Over,\nYour score went over 21\nToo bad!");
+    void payOut() {
+        if (this.player.hasBlackJack()) {
+            this.player.setCurrentMoney(this.player.getCurrentMoney()*2 + this.player.getCurrentMoney()/2);    
         }
-        else {
-            System.out.println("Game Over,\nYour score is inferior to the dealer's\nToo bad!");
-        }
-        scanner.close();
-        return false;
+        this.player.setCurrentMoney(this.player.getCurrentMoney()*2);
     }
 
-    boolean gameWon() {
-        System.out.println("YOU WON, the dealer busted");
-        scanner.close();
-        return true;
-    }
-
-    public void startOfGame() throws InterruptedException {
+    public void startOfGame(Joueur j) throws InterruptedException {
+        toUserFromJoueur(j);
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" + //
@@ -162,11 +158,16 @@ public class BlackJack {
                 "\n" + //
                 "");
         this.deck.shuffle();
-        System.out.println("You currently have "+ this.player.currentMoney+" $ in your account");
+        System.out.println("Vous avez "+ this.player.currentMoney+" € dans votre compte banquaire");
         askForBet();
         startingDeal();
         showCards();
         askForChoice();
+    }
+
+    void toUserFromJoueur(Joueur j) {
+        User user = new User(j.getArgent(), j.getNom());
+        this.setPlayer(user);
     }
 
     public Scanner getScanner() {
@@ -207,5 +208,59 @@ public class BlackJack {
 
     public void setDeck(CardDeck deck) {
         this.deck = deck;
+    }
+
+    @Override
+    public void tricher() {
+        throw new UnsupportedOperationException("Unimplemented method 'tricher'");
+    }
+
+    @Override
+    public void jouer() throws InterruptedException {
+        this.startOfGame(App.joueur);
+    }
+
+    @Override
+    public void victoire() {
+        this.dealer.setAllCardsVisible();
+        this.dealer.calculateScore();
+        this.showCards();
+        if (this.player.hasBlackJack()) {
+            if (this.dealer.hasBlackJack()) {
+                System.out.println("Double BlackJack, tu ne gagne rien et ne perds rien");
+                return;
+            }
+        }
+        System.out.println("TU AS GAGNER, le dealer a crever");
+        scanner.close();
+        payOut();
+    }
+
+    @Override
+    public void defaite() {
+        this.dealer.setAllCardsVisible();
+        this.dealer.calculateScore();
+        this.showCards();
+        if (this.dealer.getUserScore() == this.player.getUserScore()) {
+            System.out.println("Egalité,\n Tu n'as rien gagné et rien perdu\nAu moins tu n'as pas perdu!");
+
+        }
+        if (this.player.isBusted()) {
+            System.out.println("Game Over,\n Tu as crever (ton score est passé au dela de 21)\nPas de chance!");
+        }
+        else {
+            System.out.println("Game Over,\nLe dealer a un score plus élevé que le tiens\nPas de chance!");
+        }
+        scanner.close();
+    }
+
+    @Override
+    public void baisserTemps() {
+        
+    }
+
+    @Override
+    public int duree() {
+        return BlackJack.DUREE;
     }
 }

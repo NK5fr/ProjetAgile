@@ -76,7 +76,7 @@ public class User {
         for (Card card : this.userHand) {
             if (card.isVisible) {
                 calculatedScore.addValue(card.getCardValue());
-                if (card.getCardRealValue().equals(Value.ACE)) {
+                if (card.getCardRealValue().equals(Value.AS)) {
                     nbAce++;
                 }
             }
@@ -93,14 +93,36 @@ public class User {
         return this.getUserScore() > 21;
     }
 
-    boolean isBlackJack() {
-        return this.userScore.isBlackJack();
-    }
-
     void setAllCardsVisible() {
         for (Card card : this.userHand) {
             card.setVisible(true);
         }
+    }
+
+    boolean hasACE() {
+        for (Card card : this.getUserHand()) {
+            if (card.getCardRealValue().equals(Value.AS)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean hasFigure() {
+        for (Card card : this.getUserHand()) {
+            if (card.getCardRealValue().equals(Value.DIX) || card.getCardRealValue().equals(Value.VALLET) || 
+            card.getCardRealValue().equals(Value.REINE) || card.getCardRealValue().equals(Value.ROI)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean hasBlackJack() {
+        if (this.getUserHand().size() == 2 && this.hasACE() && this.hasFigure()) {
+            return true;
+        }
+        return false;
     }
 
 }
