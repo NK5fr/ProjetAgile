@@ -9,16 +9,16 @@ import main.App;
 import main.Jeu;
 
 public class bingo implements Jeu{
-    public static ArrayList<String> grille1 = new ArrayList<String>();
-    public static ArrayList<String> grille2 = new ArrayList<String>();
-    public static ArrayList<String> grille3 = new ArrayList<String>();
-    public static ArrayList<String> grille4 = new ArrayList<String>();
-    public static ArrayList<String> grille5 = new ArrayList<String>();
-    public static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
-    public static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
-    public static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
-    public static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
-    public static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
+    private static ArrayList<String> grille1 = new ArrayList<String>();
+    private static ArrayList<String> grille2 = new ArrayList<String>();
+    private static ArrayList<String> grille3 = new ArrayList<String>();
+    private static ArrayList<String> grille4 = new ArrayList<String>();
+    private static ArrayList<String> grille5 = new ArrayList<String>();
+    private static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
+    private static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
+    private static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
+    private static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
+    private static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
     public static int g1 = 0;
     public static int g2 = 0;
     public static int g3 = 0;
@@ -28,11 +28,22 @@ public class bingo implements Jeu{
     private static final int DUREE = 12;
     public static int triche = 0;
     public static int nbtriche = 0;
-
-
+    public static char c;
 
     public static void afficherTitre(String nom){
         File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affichage" + File.separator + nom + ".txt");
+        try(Scanner sc = new Scanner(file)){
+            sc.useDelimiter("\n");
+            while(sc.hasNext()){
+                System.out.println(sc.next());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(nom);        
+        }
+    }
+
+    public static void afficherRegle(String nom){
+        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "regle" + File.separator + nom + ".txt");
         try(Scanner sc = new Scanner(file)){
             sc.useDelimiter("\n");
             while(sc.hasNext()){
@@ -48,6 +59,7 @@ public class bingo implements Jeu{
     }
 
     public void tricher(){
+        triche = 0;
         nbtriche ++;
         if (nbtriche == 1){
             triche = 30;
@@ -64,18 +76,26 @@ public class bingo implements Jeu{
     }
     
     public void jouer() {
-        //clear();
-        App.joueur.setArgent(App.joueur.getArgent() - 20);
-        afficherTitre("Bingo");
-        create_grille();
-        System.out.println();
-        System.out.println("Voici ta grille : ");
-        affichage_grille(grille1);
-        System.out.println("Le jeu commence ! ");
-        lancer();
-        System.out.println();
-        victoire();
-        defaite();
+        clear();
+        System.out.println("Voulez-vous acheter une grille à 20€ ? (o/n)");
+        c = App.ecouterChar();
+        while(c != 'o' && c != 'n'){
+            System.out.println("Caractère invalide !");
+            c = App.ecouterChar();
+        }
+        if (c == 'o'){
+            App.joueur.setArgent(App.joueur.getArgent() - 20);
+            afficherTitre("Bingo");
+            create_grille();
+            System.out.println();
+            System.out.println("Voici ta grille : ");
+            affichage_grille(grille1);
+            System.out.println("Le jeu commence ! ");
+            lancer();
+            System.out.println();
+            victoire();
+            defaite();
+        }
     }
 
     public void victoire(){
@@ -99,13 +119,18 @@ public class bingo implements Jeu{
     }
 
     public void lancer(){
+        g1 = 0;
+        g2 = 0;
+        g3 = 0;
+        g4 = 0;
+        g5 = 0;
         char c;
         Random r = new Random();
         int tr = 0;
         String chiffre;
         while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
             tr = r.nextInt(100);
-            if(tr>triche){
+            if(tr>=triche){
                 chiffre = r.nextInt(45) + "";
                 while(tire.contains(chiffre)){
                     chiffre = r.nextInt(45) + "";

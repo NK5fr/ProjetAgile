@@ -49,7 +49,7 @@ public class App {
         afficher_barre("nourriture");
         System.out.print("Bonheur du joueur : ");
         System.out.print(joueur.getBonheur() );
-        afficher_barre("bohneur");
+        afficher_barre("bonheur");
         System.out.println();
         System.out.print("Nombre de jours passé : ");
         System.out.println(joueur.getNbJours());
@@ -85,7 +85,7 @@ public class App {
                 bingo b = new bingo();
                 if(jour.getTempsJour() - b.duree() < 0){
                     clear();
-                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un bingo dure 12 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un bingo dure 12 heures et il vous reste " + jour.getTempsJour() + " heures pour cette journée.");
                     Thread.sleep(5000);
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
@@ -96,7 +96,7 @@ public class App {
                 BlackJack bj = new BlackJack(joueur);
                 if(jour.getTempsJour() - bj.duree() < 0){
                     clear();
-                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un blackJack dure 2 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un blackJack dure 2 heures et il vous reste " + jour.getTempsJour() + " heures pour cette journée.");
                     Thread.sleep(5000);
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
@@ -111,7 +111,7 @@ public class App {
                 Roulette r = new Roulette();
                 if(jour.getTempsJour() - r.duree() < 0){
                     clear();
-                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une roulette dure 6 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une roulette dure 6 heures et il vous reste " + jour.getTempsJour() + " heures pour cette journée.");
                     Thread.sleep(5000);
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
@@ -122,7 +122,7 @@ public class App {
                 Machine_a_sous m = new Machine_a_sous();
                 if(jour.getTempsJour() - m.duree() < 0){
                     clear();
-                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une machine à sous dure 4 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une machine à sous dure 4 heures et il vous reste " + jour.getTempsJour() + " heures pour cette journée.");
                     Thread.sleep(5000);
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
@@ -133,7 +133,7 @@ public class App {
                 Jeu l = new Lotterie();
                 if(jour.getTempsJour() - l.duree() < 0){
                     clear();
-                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une lotterie dure 24 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une lotterie dure 24 heures et il vous reste " + jour.getTempsJour() + " heures pour cette journée.");
                     Thread.sleep(5000);
                     System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
                     Thread.sleep(5000);
@@ -271,10 +271,10 @@ public class App {
     }
 
     public static void afficher_barre(String barre){
-        if(barre.equals("bohneur")){
+        if(barre.equals("bonheur")){
             System.out.print("      " + Colors.setColor("green"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getBonheur() - 50){
+                if(i< joueur.getBonheur() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());
@@ -284,7 +284,7 @@ public class App {
         }else{
             System.out.print("      " + Colors.setColor("yellow"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getNourriture() - 50){
+                if(i< joueur.getNourriture() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());

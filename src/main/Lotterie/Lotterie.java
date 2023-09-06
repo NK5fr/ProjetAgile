@@ -140,17 +140,14 @@ public class Lotterie implements Jeu{
 
     @Override
     public void tricher() {
-        if (RAND.nextInt(4) != 1) {
-            System.out.println("Vous êtes fait attraper Vous devez payez " + Lotterie.ammende + "€");
-            App.joueur.setArgent(App.joueur.getArgent() - Lotterie.ammende);
-            defaite();
-        }
-        Lotterie.setMax_boules(25);
+        System.out.println("Vous êtes fait attraper Vous devez payez " + Lotterie.ammende + "€");
+        App.joueur.setArgent(App.joueur.getArgent() - Lotterie.ammende);
     }
 
     @Override
     public void jouer() {
         char c;
+        boolean triche = false;
         boolean trouver = true;
         boolean continuer = true;
         bingo.afficherTitre("Loterie");
@@ -166,42 +163,83 @@ public class Lotterie implements Jeu{
             }
         }
         continuer = true;
+        String z = "";
         while(continuer){
             App.clear();
-            System.out.println("Voulez vous tricher (o/n)");
+            System.out.println("Voulez vous tricher (t)");
+            System.out.println("Voulez vous voir les régles (r)");
+            System.out.println("Voulez vous continuer (c)");
             c = App.ecouterChar();
-            if (c == 'o') {
-                this.tricher();
+            if (c == 't') {
+                triche = true;
                 System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
                 continuer = false;
-            }else if (c =='n') {
+            }else if (c =='c') {
                 continuer = false;
+            }else if(c == 'r'){
+                bingo.afficherRegle("Loterie");
+                while(!z.equals("q")){
+                    System.out.println("\nAppuyer sur q pour quitter");
+                    z = App.scanner.next();
+                }
             }
         }
-
-        Lotterie l = new Lotterie();
-        l.input_user();
-        l.tirage();
-        System.out.println("Le tirages est:" + l.getTirages());
-        System.out.println("Votre prédiction est:" + l.getPredictionBoules());
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ignored) {}
-        for (Integer integer : l.getTirages()) {
-            if (l.getPredictionBoules().contains(integer)){
-                trouver = trouver && true;
-                Lotterie.nb_trouver++;
+        if (triche) {
+            if (RAND.nextInt(4) != 1) {
+                Lotterie l = new Lotterie();
+                Lotterie.setMax_boules(25);
+                l.input_user();
+                l.tirage();
+                System.out.println("Le tirages est:" + l.getTirages());
+                System.out.println("Votre prédiction est:" + l.getPredictionBoules());
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ignored) {}
+                for (Integer integer : l.getTirages()) {
+                    if (l.getPredictionBoules().contains(integer)){
+                        trouver = trouver && true;
+                        Lotterie.nb_trouver++;
+                    }
+                    else {
+                        trouver = false;
+                    }
+                }
+                if (trouver) {
+                    this.victoire();
+                }else {
+                    this.defaite();
+                }
+                this.baisserTemps();
+            }else{
+                this.tricher();
+                this.defaite();
             }
-            else {
-                trouver = false;
-            }
-        }
-        if (trouver) {
-            this.victoire();
         }else {
-            this.defaite();
+            Lotterie l = new Lotterie();
+            l.input_user();
+            l.tirage();
+            System.out.println("Le tirages est:" + l.getTirages());
+            System.out.println("Votre prédiction est:" + l.getPredictionBoules());
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored) {}
+            for (Integer integer : l.getTirages()) {
+                if (l.getPredictionBoules().contains(integer)){
+                    trouver = trouver && true;
+                    Lotterie.nb_trouver++;
+                }
+                else {
+                    trouver = false;
+                }
+            }
+            if (trouver) {
+                this.victoire();
+            }else {
+                this.defaite();
+            }
+            this.baisserTemps();
         }
-        this.baisserTemps();
+        
     }
 
     @Override
