@@ -76,19 +76,76 @@ public class Boutique {
 
         bingo.clear();
         
-        if(car.equals("n")){
-            this.afficherNourriture();
-        }else if(car.equals("b")){
-            this.afficherBonheur();
-        }else if(car.equals("t")){
+        int choix = 21;
+        
+        if(car.equals("t")){
             this.afficherTout();
+
+            do{
+                System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
+                choix = App.scanner.nextInt();
+            }while(choix<0 && choix>21);
+
+            this.acheterTout(choix);
+
+        }else{
+            if(car.equals("n")){
+                this.afficherNourriture();
+            }else if(car.equals("b")){
+                this.afficherBonheur();
+            }
+
+            do{
+                System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
+                choix = App.scanner.nextInt();
+            }while(choix<0 && choix>11);
+
+            if(car.equals("n")){
+                this.acheterNourriture(choix);
+            }else if(car.equals("b")){
+                this.acheterBonheur(choix);
+            }
+
         }
-        int choix = 11;
-        do{
-            System.out.println("Taper le chiffre de ce que vous voulez acheter, ou taper 0 pour revenir en arriere: ");
-        }while(choix<0 && choix>10);
+
+        if(choix == 0){
+            this.afficherMenu();
+        }
         
-        
+    }
+
+    public void acheterBonheur(int j){
+        int i = 1;
+        for(Consommable c: this.consommables){
+            if(c instanceof Bonheur){
+                i++;
+            }
+            if(i == j){
+                c.achete();
+            }
+        }
+    }
+
+    public void acheterNourriture(int j){
+        int i = 1;
+        for(Consommable c: this.consommables){
+            if(c instanceof Nourriture){
+                i++;
+            }
+            if(i == j){
+                c.achete();
+            }
+        }
+    }
+
+    public void acheterTout(int j){
+        int i = 1;
+        for(Consommable c: this.consommables){
+            i++;
+            if(i == j){
+                c.achete();
+            }
+        }
     }
 
     public void afficherNourriture(){

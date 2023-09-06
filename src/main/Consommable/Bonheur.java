@@ -1,5 +1,8 @@
 package main.Consommable;
 
+import main.App;
+import main.Joueur;
+
 public class Bonheur extends Consommable{
     
     private int bonheur;
@@ -11,5 +14,11 @@ public class Bonheur extends Consommable{
 
     public String effet(){
         return "Ceci est un " + this.getNom() + " qui coute " + getPrix() + " pour gagner " + bonheur +" point de bonheur.";
+    }
+
+    public void achete(){
+        super.achete();
+        int nouv_bonheur = App.joueur.getBonheur() + bonheur;
+        App.joueur.setBonheur(nouv_bonheur);
     }
 }
