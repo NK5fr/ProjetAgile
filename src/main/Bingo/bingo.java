@@ -52,6 +52,8 @@ public class bingo implements Jeu{
         }catch(FileNotFoundException e){
             System.out.println(nom);        
         }
+        System.out.println("\n Entrez un caractère pour continuer");
+        App.scanner.next();
     }
 
     public int duree(){
