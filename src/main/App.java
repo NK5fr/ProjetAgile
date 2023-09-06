@@ -137,4 +137,8 @@ public class App {
         }
         Thread.sleep(1000);
     }
+
+    public static void setJoueur(Joueur joueur) {
+        App.joueur = joueur;
+    }
 }

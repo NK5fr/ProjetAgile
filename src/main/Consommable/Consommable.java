@@ -1,5 +1,8 @@
 package main.Consommable;
 
+import main.App;
+import main.Joueur;
+
 public class Consommable {
     
     private int prix;
@@ -14,7 +17,10 @@ public class Consommable {
         return "ceci est un " + nom + " qui coute " + prix;
     }
 
-    public void achete(){}
+    public void achete(){
+        int argent_restant = App.joueur.getArgent() - prix;
+        App.joueur.setArgent(argent_restant);
+    }
 
     public int getPrix() {
         return prix;
