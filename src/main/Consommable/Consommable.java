@@ -17,14 +17,17 @@ public class Consommable {
         return "ceci est un " + nom + " qui coute " + prix;
     }
 
-    public boolean achete(){
+    public boolean achete() throws InterruptedException{
         
         int argent_restant = App.joueur.getArgent() - prix;
         if(argent_restant >= 0){
-           App.joueur.setArgent(argent_restant); 
+           App.joueur.setArgent(argent_restant);
+           System.out.println("Merci d'avoir acheté l'article " + nom);
+           Thread.sleep(2000);
            return true;
         }else{
             System.out.println("tu n'as pas assez d'argent le pauvre");
+            Thread.sleep(2000);
         }
         return false;
     }

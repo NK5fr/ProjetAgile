@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
+import main.Boutique.Boutique;
 import main.Lotterie.Lotterie;
 
 public class App {
@@ -40,8 +41,9 @@ public class App {
         scanner.next();
     }
 
-    private static void boutique(){
-
+    private static void boutique() throws InterruptedException{
+        Boutique b = new Boutique();
+        b.menu();
     }
 
     private static void jouerArgent(){

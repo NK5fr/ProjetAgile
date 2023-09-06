@@ -49,7 +49,7 @@ public class NourritureTest {
     }
 
     @Test
-    public void acheteTest(){
+    public void acheteTest() throws InterruptedException{
         assertTrue(pizza.achete());
         assertEquals(50,App.joueur.getNourriture());
         assertEquals(20,App.joueur.getArgent());

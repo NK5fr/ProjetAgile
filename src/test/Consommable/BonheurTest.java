@@ -51,7 +51,7 @@ public class BonheurTest {
     }
 
     @Test
-    public void acheteTest(){
+    public void acheteTest() throws InterruptedException{
         assertTrue(cloche.achete());
         assertEquals(40,App.joueur.getBonheur());
         assertEquals(20,App.joueur.getArgent());
