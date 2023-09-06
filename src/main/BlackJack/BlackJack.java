@@ -15,7 +15,7 @@ public class BlackJack {
     
     public BlackJack(User user, CardDeck deck, User dealer, int bet) {
         this.player = user;
-        this.player.setDenomination("player");
+        this.player.setDenomination("joueur");
         this.dealer = dealer;
         this.deck = deck;
         this.bet = bet;
@@ -66,14 +66,14 @@ public class BlackJack {
 
     void askForChoice() throws InterruptedException {
         String choice = "";
-        while (!(choice.equals("H")) && !(choice.equals("S"))) {
-            System.out.println("H- Hit");
-            System.out.println("S- Stand");
+        while (!(choice.equals("T")) && !(choice.equals("R"))) {
+            System.out.println("T- Tirer");
+            System.out.println("R- Rester");
             choice = scanner.next().toUpperCase();
         }
-        if (choice.equals("H")) {
+        if (choice.equals("T")) {
             this.hit();
-        } else if (choice.equals("S")) {
+        } else if (choice.equals("R")) {
             this.stand();
         }
     }
@@ -81,7 +81,7 @@ public class BlackJack {
     void askForBet() {
         int choice = 0;
         while (choice > this.player.currentMoney || choice <= 0) {
-            System.out.println("How much will you risk");
+            System.out.println("Combien allez-vous risquer");
             choice = scanner.nextInt();
         }
         bet(choice);
