@@ -95,7 +95,7 @@ public class BlackJack implements Jeu{
     void askForBet() {
         int choice = 0;
         while (choice > this.player.currentMoney || choice <= 0) {
-            System.out.println("Combien allez-vous risquer?");
+            System.out.println("Combien allez-vous mettre en jeu?");
             choice = scanner.nextInt();
         }
         bet(choice);
@@ -165,6 +165,7 @@ public class BlackJack implements Jeu{
         this.deck.shuffle();
         System.out.println("Vous avez "+ this.player.currentMoney+" € dans votre compte banquaire");
         askForBet();
+        App.clear();
         startingDeal();
         showCards();
         askForChoice();
@@ -243,6 +244,7 @@ public class BlackJack implements Jeu{
 
     @Override
     public void defaite() {
+        App.joueur.setBonheur(App.joueur.getBonheur()-5);
         this.dealer.setAllCardsVisible();
         this.dealer.calculateScore();
         this.showCards();
@@ -261,11 +263,12 @@ public class BlackJack implements Jeu{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
     }
 
     @Override
     public void baisserTemps() {
+        App.jour.moinsTempsJour(BlackJack.DUREE);
         
     }
 
