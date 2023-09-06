@@ -41,9 +41,10 @@ public class Card {
 
     @Override
     public String toString() {
+        Visual v = new Visual();
         if(this.isVisible) {
-            return this.cardValue.toString() + " de " + this.cardColor.toString();
+            return v.cardVisual(this);
         }
-        return "caché";
+        return v.cardHidden();
     }
 }
