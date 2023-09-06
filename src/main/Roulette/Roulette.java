@@ -16,6 +16,7 @@ public class Roulette implements Jeu{
     private static int argentParier;
     private static List<Integer> black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
     private static List<Integer> red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
+    private final static Random RAND = new Random();
 
     public Roulette(){
         Random rand = new Random();
@@ -53,6 +54,7 @@ public class Roulette implements Jeu{
             }
         }while(!fin);
         boolean continuer = true;
+        boolean triche = false;
         char c;
         while(continuer){
             App.clear();
@@ -60,12 +62,17 @@ public class Roulette implements Jeu{
             c = App.ecouterChar();
             if (c == 'o') {
                 new Roulette().tricher();
-                System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
+                System.out.println("Vous êtes sur de gagner");
                 continuer = false;
             }else if (c =='n') {
                 continuer = false;
             }
         }
+
+        if(triche){
+            Roulette.tricher();
+        }
+
     }
 
     public static int Gain(){
@@ -189,33 +196,36 @@ public class Roulette implements Jeu{
 
     @Override
     public void tricher() {
-        if(pari.equals("noir")){
-            Roulette.setResultat(2);
-        }else if(pari.equals("rouge")){
-            Roulette.setResultat(1);
-        }else if(pari.equals("pair")){
-            Roulette.setResultat(2);
-        }else if(pari.equals("impair")){
-            Roulette.setResultat(1);
-        }else if(pari.equals("moitie1")){
-            Roulette.setResultat(1);
-        }else if(pari.equals("moitie2")){
-            Roulette.setResultat(20);
-        }else if(pari.equals("colonne1")){
-            Roulette.setResultat(1);
-        }else if(pari.equals("colonne2")){
-            Roulette.setResultat(2);
-        }else if(pari.equals("colonne3")){
-            Roulette.setResultat(3);
-        }else if(pari.equals("tiers1")){
-            Roulette.setResultat(1);
-        }else if(pari.equals("tiers2")){
-            Roulette.setResultat(20);
-        }else if(pari.equals("tiers3")){
-            Roulette.setResultat(28);
-        }else {
-            Roulette.setResultat(Integer.parseInt(pari));
+        if (RAND.nextInt(100) > 75){
+            if(pari.equals("noir")){
+                Roulette.setResultat(2);
+            }else if(pari.equals("rouge")){
+                Roulette.setResultat(1);
+            }else if(pari.equals("pair")){
+                Roulette.setResultat(2);
+            }else if(pari.equals("impair")){
+                Roulette.setResultat(1);
+            }else if(pari.equals("moitie1")){
+                Roulette.setResultat(1);
+            }else if(pari.equals("moitie2")){
+                Roulette.setResultat(20);
+            }else if(pari.equals("colonne1")){
+                Roulette.setResultat(1);
+            }else if(pari.equals("colonne2")){
+                Roulette.setResultat(2);
+            }else if(pari.equals("colonne3")){
+                Roulette.setResultat(3);
+            }else if(pari.equals("tiers1")){
+                Roulette.setResultat(1);
+            }else if(pari.equals("tiers2")){
+                Roulette.setResultat(20);
+            }else if(pari.equals("tiers3")){
+                Roulette.setResultat(28);
+            }else {
+                Roulette.setResultat(Integer.parseInt(pari));
+            }
         }
+        
     }
 
     @Override
@@ -234,8 +244,27 @@ public class Roulette implements Jeu{
                 return;
             }
         }
+        continuer = true;
+        String z = "";
+        while(continuer){
+            App.clear();
+            System.out.println("Voulez vous voir les régles (r)");
+            System.out.println("Voulez vous continuer (c)");
+            c = App.ecouterChar();
+            if (c =='c') {
+                continuer = false;
+            }else if(c == 'r'){
+                bingo.afficherRegle("Roulette");
+                while(!z.equals("q")){
+                    System.out.println("\nAppuyer sur q pour quitter");
+                    z = App.scanner.next();
+                }
+            }
+        }
 
         Pari();
+
+
         
         System.out.println("Le numéro gagnant est : " + resultat);
     }
