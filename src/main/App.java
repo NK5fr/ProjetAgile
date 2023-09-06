@@ -48,8 +48,8 @@ public class App {
         char c;
         while(continuer){
             clear();
-            System.out.println("Jour " + joueur.getNbJours()+ " | Argent - " + joueur.getArgent() + "€");
-            System.out.println("Heure " + jour.getTempsJour());
+            System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
+            System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
@@ -67,8 +67,12 @@ public class App {
             }else if(c == 'm'){
                 
             }else if(c == 'l'){
-                Lotterie l = new Lotterie();
-                l.jouer();
+                Jeu l = new Lotterie();
+                try {
+                    l.jouer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }else if(c == 'q'){
                 continuer = false;
             }

@@ -33,4 +33,13 @@ public class Jour {
         res += "Argent en fin de journée : " + App.joueur.getArgent() + "\n";
         return res;
     }
+
+    public String getVisualHour() {
+        int result = Math.abs(this.getTempsJour()-24);
+        String realTime = ""+result;
+        if (result < 10) {
+            realTime = "0" + realTime;
+        }
+        return realTime;
+    }
 }
