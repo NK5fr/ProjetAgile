@@ -256,6 +256,7 @@ public class Roulette implements Jeu{
 
     @Override
     public void victoire() {
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         System.out.println("Bravo vous avez gagner " + Roulette.Gain() +"€");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         App.joueur.setArgent(App.joueur.getArgent() + Roulette.Gain());
@@ -263,6 +264,7 @@ public class Roulette implements Jeu{
 
     @Override
     public void defaite() {
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
         System.out.println("Dommage vous avez perdu");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         try {
