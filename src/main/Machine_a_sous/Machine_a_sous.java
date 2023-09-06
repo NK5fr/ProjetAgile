@@ -160,4 +160,8 @@ public class Machine_a_sous implements Jeu{
         return Machine_a_sous.DUREE;
     }
 
+    public String toString(){
+        return "Machine_à_sous";
+    }
+
 }

@@ -287,4 +287,8 @@ public class Lotterie implements Jeu{
     public int duree() {
         return Lotterie.DUREE;
     }
+
+    public String toString(){
+        return "Lotterie";
+    }
 }

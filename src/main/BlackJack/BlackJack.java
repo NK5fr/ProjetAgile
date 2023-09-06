@@ -382,4 +382,8 @@ public class BlackJack implements Jeu{
         App.joueur.setBonheur(App.joueur.getBonheur() - 10);
     }
 
+    public String toString(){
+        return "BlackJack";
+    }
+
 }

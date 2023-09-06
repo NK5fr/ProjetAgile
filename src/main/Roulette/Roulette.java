@@ -268,5 +268,7 @@ public class Roulette implements Jeu{
         return Roulette.DUREE;
     }
 
-    
+    public String toString(){
+        return "Roulette";
+    }
 }

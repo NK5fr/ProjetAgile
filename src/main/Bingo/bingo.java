@@ -287,4 +287,7 @@ public class bingo implements Jeu{
         System.out.flush();
     }
    
+    public String toString(){
+        return "Bingo";
+    }
 }
