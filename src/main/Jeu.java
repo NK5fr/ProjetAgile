@@ -4,11 +4,11 @@ public interface Jeu {
 
     public void tricher();
 
-    public void jouer(Joueur joueur);
+    public void jouer();
 
-    public void victoire(Joueur joueur);
+    public void victoire();
 
-    public void defaite(Joueur joueur);
+    public void defaite();
 
     public void baisserTemps();
 
