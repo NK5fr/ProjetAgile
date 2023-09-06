@@ -274,7 +274,7 @@ public class App {
         if(barre.equals("bonheur")){
             System.out.print("      " + Colors.setColor("green"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getBonheur() - 50){
+                if(i< joueur.getBonheur() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());
@@ -284,7 +284,7 @@ public class App {
         }else{
             System.out.print("      " + Colors.setColor("yellow"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getNourriture() - 50){
+                if(i< joueur.getNourriture() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());
