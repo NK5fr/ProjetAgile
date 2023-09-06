@@ -43,6 +43,18 @@ public class bingo implements Jeu{
         }
     }
 
+    public static void afficherRegle(String nom){
+        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "regle" + File.separator + nom + ".txt");
+        try(Scanner sc = new Scanner(file)){
+            sc.useDelimiter("\n");
+            while(sc.hasNext()){
+                System.out.println(sc.next());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(nom);        
+        }
+    }
+
     public int duree(){
         return DUREE;
     }
