@@ -4,7 +4,7 @@ public interface Jeu {
 
     public void tricher();
 
-    public void jouer();
+    public void jouer() throws InterruptedException;
 
     public void victoire();
 

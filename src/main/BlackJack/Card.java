@@ -42,8 +42,8 @@ public class Card {
     @Override
     public String toString() {
         if(this.isVisible) {
-            return this.cardValue.toString() + " of " + this.cardColor.toString();
+            return this.cardValue.toString() + " de " + this.cardColor.toString();
         }
-        return "hidden";
+        return "caché";
     }
 }

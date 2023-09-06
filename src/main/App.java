@@ -2,6 +2,8 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 
+import main.Lotterie.Lotterie;
+
 public class App {
     public static Scanner scanner = new Scanner(System.in);
     public static Joueur joueur;
@@ -46,6 +48,7 @@ public class App {
         char c;
         while(continuer){
             clear();
+            System.out.println("Argent - " + joueur.getArgent() + "€\n");
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
@@ -63,7 +66,8 @@ public class App {
             }else if(c == 'm'){
                 
             }else if(c == 'l'){
-                ;
+                Lotterie l = new Lotterie();
+                l.jouer();
             }else if(c == 'q'){
                 continuer = false;
             }
@@ -144,5 +148,9 @@ public class App {
             file.delete();
         }
         Thread.sleep(3000);
+    }
+
+    public static void setJoueur(Joueur joueur) {
+        App.joueur = joueur;
     }
 }

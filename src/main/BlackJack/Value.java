@@ -1,19 +1,19 @@
 package main.BlackJack;
 
 public enum Value {
-    TWO(2), 
-    THREE(3), 
-    FOUR(4), 
+    DEUX(2), 
+    TROIS(3), 
+    QUATRE(4), 
     FIVE(5), 
     SIX(6), 
-    SEVEN(7), 
-    EIGHT(8), 
-    NINE(9), 
-    TEN(10), 
-    JACK(10), 
-    QUEEN(10), 
-    KING(10), 
-    ACE(11);
+    SEPT(7), 
+    HUIT(8), 
+    NEUF(9), 
+    DIX(10), 
+    VALLET(10), 
+    REINE(10), 
+    ROI(10), 
+    AS(11);
 
     int cardValue;
 
