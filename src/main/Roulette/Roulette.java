@@ -69,9 +69,12 @@ public class Roulette implements Jeu{
             }
         }
 
+        Roulette r = new Roulette();
+
         if(triche){
-            Roulette.tricher();
+            r.tricher();
         }
+        Gain();
 
     }
 
@@ -261,12 +264,12 @@ public class Roulette implements Jeu{
                 }
             }
         }
-
         Pari();
-
+        
 
         
         System.out.println("Le numéro gagnant est : " + resultat);
+        Thread.sleep(3000);
     }
 
     @Override
@@ -275,6 +278,11 @@ public class Roulette implements Jeu{
         System.out.println("Bravo vous avez gagner " + Roulette.Gain() +"€");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         App.joueur.setArgent(App.joueur.getArgent() + Roulette.Gain());
+        try{
+            Thread.sleep(3000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -284,7 +292,9 @@ public class Roulette implements Jeu{
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         try {
             Thread.sleep(3000);
-        } catch (InterruptedException ignored) {}
+        } catch (InterruptedException ignored) {
+
+        }
     }
 
     @Override
