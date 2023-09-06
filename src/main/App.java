@@ -6,14 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
 import main.Boutique.Boutique;
 import main.Lotterie.Lotterie;
+import main.Roulette.Colors;
 
 public class App {
     public static Scanner scanner = new Scanner(System.in);
@@ -43,9 +42,12 @@ public class App {
         System.out.print("Argent du joueur : ");
         System.out.println(joueur.getArgent() + " €");
         System.out.print("Nourriture du joueur : ");
-        System.out.println(joueur.getNourriture());
+        System.out.print(joueur.getNourriture());
+        afficher_barre("nourriture");
         System.out.print("Bonheur du joueur : ");
-        System.out.println(joueur.getBonheur());
+        System.out.print(joueur.getBonheur() );
+        afficher_barre("bohneur");
+        System.out.println();
         System.out.print("Nombre de jours passé : ");
         System.out.println(joueur.getNbJours());
         System.out.println();
@@ -137,8 +139,6 @@ public class App {
         clear();
         List<String> players = new ArrayList<>();
         List<Integer> scores = new ArrayList<>();
-        String name;
-        Integer score;
         try(Scanner scan = new Scanner(CLASSEMENT)){
             scan.useDelimiter("\n");
             while(scan.hasNext()){
@@ -218,5 +218,31 @@ public class App {
             saveClassement();
         }
         Thread.sleep(3000);
+    }
+
+    public static void afficher_barre(String barre){
+        if(barre.equals("bohneur")){
+            System.out.print("      " + Colors.setColor("green"));
+            for(int i=0; i< 50; i++){
+                if(i< joueur.getBonheur() - 50){
+                    System.out.print("\u2588");
+                }else{
+                    System.out.print(Colors.resetColor());
+                    System.out.print("\u2588");
+                }
+            }
+        }else{
+            System.out.print("      " + Colors.setColor("yellow"));
+            for(int i=0; i< 50; i++){
+                if(i< joueur.getNourriture() - 50){
+                    System.out.print("\u2588");
+                }else{
+                    System.out.print(Colors.resetColor());
+                    System.out.print("\u2588");
+                }
+            }
+        }
+        System.out.print(Colors.resetColor());
+        System.out.println();
     }
 }

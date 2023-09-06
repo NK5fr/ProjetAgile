@@ -119,6 +119,7 @@ public class Machine_a_sous implements Jeu{
 
     @Override
     public void victoire() {
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         int récompense = 0;
         if (this.machine.get(0).getIdx() == 0) {
             récompense = (int) (Machine_a_sous.prix * 1.5);
@@ -141,6 +142,7 @@ public class Machine_a_sous implements Jeu{
 
     @Override
     public void defaite() {
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
         System.out.println("Dommage vous avez perdu");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         try {
