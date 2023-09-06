@@ -1,8 +1,16 @@
 package main;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
+import main.Boutique.Boutique;
 import main.Lotterie.Lotterie;
 import main.Roulette.Colors;
 
@@ -10,6 +18,7 @@ public class App {
     public static Scanner scanner = new Scanner(System.in);
     public static Joueur joueur;
     public static Jour jour;
+    public static final File CLASSEMENT = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "classement" + File.separator + "classement.csv");
 
     private static void introduction(){
         clear();
@@ -46,8 +55,9 @@ public class App {
         scanner.next();
     }
 
-    private static void boutique(){
-
+    private static void boutique() throws InterruptedException{
+        Boutique b = new Boutique();
+        b.menu();
     }
 
     private static void jouerArgent(){
@@ -112,6 +122,45 @@ public class App {
         return c.charAt(0);
     }
 
+    public static void saveClassement(){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(CLASSEMENT, true))){
+            bw.write(joueur.getNom());
+            bw.newLine();
+            bw.write("" + joueur.getNbJours());
+            bw.newLine();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void classement(){
+        clear();
+        List<String> players = new ArrayList<>();
+        List<Integer> scores = new ArrayList<>();
+        try(Scanner scan = new Scanner(CLASSEMENT)){
+            scan.useDelimiter("\n");
+            while(scan.hasNext()){
+                players.add(scan.next());
+                scores.add(Integer.valueOf(scan.next()));
+            }
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        Integer max;
+        int idxMax;
+        for(int i = 1; i <= 10; i++){
+            max = Collections.max(scores);
+            idxMax = scores.indexOf(max);
+            System.out.println("N°" + i + " : " + players.get(idxMax) + " avec un score de " + scores.get(idxMax));
+            players.remove(idxMax);
+            scores.remove(idxMax);
+        }
+        System.out.print("Entrez un caractère pour quitter : ");
+        scanner.next();
+    }
+
     public static void main(String[] args) throws Exception {
         introduction();
         Thread.sleep(2000);
@@ -125,6 +174,7 @@ public class App {
             System.out.println("- la commande b affiche la boutique");
             System.out.println("- la commande j permet de jouer aux jeux d'argent");
             System.out.println("- la commande p permet de passer le temps");
+            System.out.println("- la commande c permet d'afficher le classement des joueurs");
             System.out.println("- la commande q permet de quitter le jeu");
             c = ecouterChar();
             if(c == 'i'){
@@ -135,10 +185,12 @@ public class App {
                 jouerArgent();
             }else if(c == 'p'){
                 jour.setTempsJour(0);
+            }else if(c == 'c'){
+                classement();
             }else if(c == 'q'){
                 continuer = false;
             }
-            if(jour.getTempsJour() == 0){
+            if(joueur.getArgent() > 0 && jour.getTempsJour() == 0){
                 clear();
                 System.out.println("Encore une journée de finie...\n");
                 System.out.println(jour);
@@ -157,11 +209,13 @@ public class App {
             System.out.println("GAME OVER !!! Vous n'avez pas mangé depuis trop longtemps");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
+            saveClassement();
         }else if(joueur.getArgent() < 0){
             //clear();
             System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
+            saveClassement();
         }
         Thread.sleep(3000);
     }

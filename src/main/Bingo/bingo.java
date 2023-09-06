@@ -79,6 +79,7 @@ public class bingo implements Jeu{
     }
 
     public void victoire(){
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         if(!trouve1.contains(false)){
             System.out.println("Vous avez gagné !");
             System.out.println();
@@ -88,6 +89,7 @@ public class bingo implements Jeu{
     }
 
     public void defaite(){
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
         if(trouve1.contains(false)){
             System.out.println("Vous avez perdu...");
             System.out.println();

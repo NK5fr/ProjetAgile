@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 import main.App;
+import main.Jeu;
 import main.Bingo.bingo;
 
-public class Roulette{
+public class Roulette implements Jeu{
     
     private static int resultat;
+    private final static int DUREE = 6;
     private static String pari; // a voir sous quel forme on fait le pari
     private static int argentParier;
     private static List<Integer> black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
@@ -44,11 +46,26 @@ public class Roulette{
                 do{
                     System.out.println("metter combien d'argent");
                     argentParier = App.scanner.nextInt();
-                }while(argentParier < 0);
+                }while(argentParier < 0 && App.joueur.getArgent() > argentParier);
+                App.joueur.setArgent(App.joueur.getArgent()-argentParier);
             }else{
                 System.out.println("Le pari n'est pas valide");
             }
         }while(!fin);
+        boolean continuer = true;
+        char c;
+        while(continuer){
+            App.clear();
+            System.out.println("Voulez vous tricher (o/n)");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                new Roulette().tricher();
+                System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
+                continuer = false;
+            }else if (c =='n') {
+                continuer = false;
+            }
+        }
     }
 
     public static int Gain(){
@@ -144,18 +161,6 @@ public class Roulette{
     }
 
 
-
-    public static void main(String[] args){
-        //Roulette r = new Roulette();
-
-        bingo.afficherTitre("Roulette");
-
-        Pari();
-        
-        System.out.println("Le numéro gagnant est : " + resultat);
-        System.out.println("vous avez gagner " + Gain());
-    }
-
     public static int getResultat() {
         return resultat;
     }
@@ -194,6 +199,87 @@ public class Roulette{
 
     public static void setRed(List<Integer> red) {
         Roulette.red = red;
+    }
+
+    @Override
+    public void tricher() {
+        if(pari.equals("noir")){
+            Roulette.setResultat(2);
+        }else if(pari.equals("rouge")){
+            Roulette.setResultat(1);
+        }else if(pari.equals("pair")){
+            Roulette.setResultat(2);
+        }else if(pari.equals("impair")){
+            Roulette.setResultat(1);
+        }else if(pari.equals("moitie1")){
+            Roulette.setResultat(1);
+        }else if(pari.equals("moitie2")){
+            Roulette.setResultat(20);
+        }else if(pari.equals("colonne1")){
+            Roulette.setResultat(1);
+        }else if(pari.equals("colonne2")){
+            Roulette.setResultat(2);
+        }else if(pari.equals("colonne3")){
+            Roulette.setResultat(3);
+        }else if(pari.equals("tiers1")){
+            Roulette.setResultat(1);
+        }else if(pari.equals("tiers2")){
+            Roulette.setResultat(20);
+        }else if(pari.equals("tiers3")){
+            Roulette.setResultat(28);
+        }else {
+            Roulette.setResultat(Integer.parseInt(pari));
+        }
+    }
+
+    @Override
+    public void jouer() throws InterruptedException {
+        bingo.afficherTitre("Roulette");
+
+        char c;
+        boolean continuer = true;
+        while(continuer){
+            App.clear();
+            System.out.println("Voulez vous entrez, vous pouvez choisir votre mise (o/n)");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                continuer = false;
+            }else if (c =='n') {
+                return;
+            }
+        }
+
+        Pari();
+        
+        System.out.println("Le numéro gagnant est : " + resultat);
+    }
+
+    @Override
+    public void victoire() {
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
+        System.out.println("Bravo vous avez gagner " + Roulette.Gain() +"€");
+        System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+        App.joueur.setArgent(App.joueur.getArgent() + Roulette.Gain());
+    }
+
+    @Override
+    public void defaite() {
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
+        System.out.println("Dommage vous avez perdu");
+        System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
+    }
+
+    @Override
+    public void baisserTemps() {
+        App.jour.moinsTempsJour(Roulette.DUREE);
+    }
+
+    @Override
+    public int duree() {
+        return Roulette.DUREE;
     }
 
     

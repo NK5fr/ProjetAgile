@@ -16,7 +16,7 @@ public class Nourriture extends Consommable{
         return "Ceci est un " + this.getNom() + " qui coute " + getPrix() + " pour gagner " + faim +" point de nourriture.";
     }
 
-    public boolean achete(){
+    public boolean achete() throws InterruptedException{
         if(super.achete()){
             int nouv_faim = App.joueur.getNourriture() + faim;
             App.joueur.setNourriture(nouv_faim);

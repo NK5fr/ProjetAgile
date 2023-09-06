@@ -20,7 +20,7 @@ public class Lotterie implements Jeu{
     private static int max_boules = 45;
     private final static int PRIX = 5_000;
     private final static int PRIX_TICKET = 5;
-    private final static int DUREE = 2;
+    private final static int DUREE = 24;
     private final static Random RAND = new Random();
 
     public Lotterie() {
@@ -206,6 +206,8 @@ public class Lotterie implements Jeu{
 
     @Override
     public void victoire() {
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         int argent = Lotterie.PRIX;
         if (Lotterie.nb_trouver == 6) {
             System.out.println("Bravo vous avez gagner " + argent +"€");
