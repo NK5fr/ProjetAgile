@@ -6,7 +6,10 @@ import main.BlackJack.BlackJack;
 import main.BlackJack.User;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -29,7 +32,7 @@ public class BlackJackTest {
 
     @BeforeEach
 	public void beforeATest() {
-        b = new BlackJack(new User(100));
+        b = new BlackJack(new User(100, "test"));
 	}
 
     @AfterEach
@@ -39,8 +42,12 @@ public class BlackJackTest {
 
     @Test
     public void startingDealTest() {
-        assertEquals(0, b.player.getUserScore());
-        
+        assertEquals(0, b.getPlayer().getUserScore());
+        assertEquals(0, b.getDealer().getUserScore());
+        b.startingDeal();
+        assertEquals(2, b.getPlayer().getUserHand().size());
+        assertEquals(2, b.getDealer().getUserHand().size());
+        assertNotEquals(0, b.getPlayer().getUserScore());
+        assertNotEquals(0, b.getDealer().getUserScore());
     }
-    
 }
