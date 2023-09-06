@@ -18,6 +18,14 @@ public class Jour {
         return tempsJour;
     }
 
+    public void setTempsJour(int tempsJour) {
+        this.tempsJour = tempsJour;
+    }
+
+    public void moinsTempsJour(int tempsJour){
+        this.tempsJour -= tempsJour;
+    }
+
     public String toString(){
         String res = "Jeu(x) du jour :\n";
         for(Jeu j : jeuxDuJour){

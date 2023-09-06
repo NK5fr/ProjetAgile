@@ -11,7 +11,7 @@ public class Consommable {
     }
 
     public String effet(){
-        return "ceci est un consommable";
+        return "ceci est un " + nom + " qui coute " + prix;
     }
 
     public void achete(){}

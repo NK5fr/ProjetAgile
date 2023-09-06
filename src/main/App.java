@@ -100,6 +100,7 @@ public class App {
             System.out.println("- la commande i affiche les informations sur le joueur");
             System.out.println("- la commande b affiche la boutique");
             System.out.println("- la commande j permet de jouer aux jeux d'argent");
+            System.out.println("- la commande p permet de passer le temps");
             System.out.println("- la commande q permet de quitter le jeu");
             c = ecouterChar();
             if(c == 'i'){
@@ -108,6 +109,8 @@ public class App {
                 boutique();
             }else if(c == 'j'){
                 jouerArgent();
+            }else if(c == 'p'){
+                jour.setTempsJour(0);
             }else if(c == 'q'){
                 continuer = false;
             }
