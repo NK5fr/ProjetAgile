@@ -7,8 +7,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import main.App;
+import main.Jeu;
 
-public class bingo {
+public class bingo implements Jeu{
     public static ArrayList<String> grille1 = new ArrayList<String>();
     public static ArrayList<String> grille2 = new ArrayList<String>();
     public static ArrayList<String> grille3 = new ArrayList<String>();
@@ -25,25 +26,11 @@ public class bingo {
     public static int g4 = 0;
     public static int g5 = 0;
     public static ArrayList<String> tire = new ArrayList<>();
+    private static final int DUREE = 12;
+    public static int triche = 0;
+    public static int nbtriche = 0;
 
 
-    /* public static void presentation(){
-        System.out.println("\n" + //
-                "\n" + //
-                " .----------------.  .----------------.  .-----------------. .----------------.  .----------------. \n" + //
-                "| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\n" + //
-                "| |   ______     | || |     _____    | || | ____  _____  | || |    ______    | || |     ____     | |\n" + //
-                "| |  |_   _ \\    | || |    |_   _|   | || ||_   \\|_   _| | || |  .' ___  |   | || |   .'    `.   | |\n" + //
-                "| |    | |_) |   | || |      | |     | || |  |   \\ | |   | || | / .'   \\_|   | || |  /  .--.  \\  | |\n" + //
-                "| |    |  __'.   | || |      | |     | || |  | |\\ \\| |   | || | | |    ____  | || |  | |    | |  | |\n" + //
-                "| |   _| |__) |  | || |     _| |_    | || | _| |_\\   |_  | || | \\ `.___]  _| | || |  \\  `--'  /  | |\n" + //
-                "| |  |_______/   | || |    |_____|   | || ||_____|\\____| | || |  `._____.'   | || |   `.____.'   | |\n" + //
-                "| |              | || |              | || |              | || |              | || |              | |\n" + //
-                "| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\n" + //
-                " '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \n" + //
-                "\n" + //
-                "");
-    } */
 
     public static void afficherTitre(String nom){
         File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affichage" + File.separator + nom + ".txt");
@@ -57,9 +44,30 @@ public class bingo {
         }
     }
 
+    public int duree(){
+        return DUREE;
+    }
+
+    public void tricher(){
+        if (nbtriche == 0){
+            triche = 30;
+            nbtriche ++;
+        }else{
+            triche += 10;
+            nbtriche ++;
+        }
+        grille1.set(g1, "  ");
+        trouve1.set(g1, true);
+        g1 ++;
+    }
+
+    public void baisserTemps(){
+        App.jour.moinsTempsJour(duree());
+    }
     
-    public static void jouer()throws FileNotFoundException {
+    public void jouer() {
         clear();
+        App.joueur.setArgent(App.joueur.getArgent() - 20);
         afficherTitre("Bingo");
         create_grille();
         System.out.println();
@@ -68,53 +76,84 @@ public class bingo {
         System.out.println("Le jeu commence ! ");
         lancer();
         System.out.println();
-        //Indique si on a gagné ou perdu
+        victoire();
+        defaite();
+    }
+
+    public void victoire(){
         if(!trouve1.contains(false)){
             System.out.println("Vous avez gagné !");
-        }else{
-            System.out.println("Vous avez perdu...");
+            System.out.println();
+            App.joueur.setArgent(App.joueur.getArgent() + 100);
         }
     }
 
-    public static void lancer() throws FileNotFoundException{
+    public void defaite(){
+        if(trouve1.contains(false)){
+            System.out.println("Vous avez perdu...");
+            System.out.println();
+        }
+    }
+
+    public void lancer(){
+        char c;
         Random r = new Random();
+        int tr = 0;
         String chiffre;
         while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
-            chiffre = r.nextInt(45) + "";
-            while(tire.contains(chiffre)){
+            tr = r.nextInt(100);
+            if(tr>triche){
                 chiffre = r.nextInt(45) + "";
+                while(tire.contains(chiffre)){
+                    chiffre = r.nextInt(45) + "";
+                }
+                tire.add(chiffre + "");
+                System.out.println();
+                System.out.println("Que voulez-vous faire ?");
+                System.out.println("-> [b] Passer au tour suivant");
+                System.out.println("-> [c] Tricher");
+                System.out.println();
+                c = App.ecouterChar();
+                while(c != 'c' && c != 'b'){
+                    c = App.ecouterChar();
+                }
+                affichageDé(chiffre);
+                if(c == 'c'){
+                    tricher();
+                }else{   
+                    if(grille1.contains(chiffre)){
+                        trouve1.set(g1, true);
+                        g1++;
+                        grille1.set(grille1.indexOf(chiffre), "  ");
+                    }
+                }
+                if(grille2.contains(chiffre)){
+                    trouve2.set(g2, true);
+                    g2++;
+                }
+                if(grille3.contains(chiffre)){
+                    trouve3.set(g3, true);
+                    g3++;
+                }
+                if(grille4.contains(chiffre)){
+                    trouve4.set(g4, true);
+                    g4++;
+                }
+                if(grille5.contains(chiffre)){
+                    trouve5.set(g5, true);
+                    g5++;
+                }
+                affichage_grille(grille1);
+                System.out.println();
+                affichage_score();
+            }else{
+                System.out.println();
+                System.out.println("Vous avez été surpris en train de tricher ! ");
+                System.out.println("Vous vous faites éjecter du casino et payer une amende de 100e.");
+                App.joueur.setArgent(App.joueur.getArgent() - 100);
+                break;
             }
-            tire.add(chiffre + "");
-            try{
-                App.scanner.nextLine();
-            }catch(InputMismatchException e){
-                System.out.println("OK");
-            }
-            affichageDé(chiffre);
-            if(grille1.contains(chiffre)){
-                trouve1.set(g1, true);
-                g1++;
-                grille1.set(grille1.indexOf(chiffre), "  ");
-            }
-            if(grille2.contains(chiffre)){
-                trouve2.set(g2, true);
-                g2++;
-            }
-            if(grille3.contains(chiffre)){
-                trouve3.set(g3, true);
-                g3++;
-            }
-            if(grille4.contains(chiffre)){
-                trouve4.set(g4, true);
-                g4++;
-            }
-            if(grille5.contains(chiffre)){
-                trouve5.set(g5, true);
-                g5++;
-            }
-            affichage_grille(grille1);
-            System.out.println();
-            affichage_score();
+            
         }
     }
     
@@ -219,8 +258,5 @@ public class bingo {
         System.out.print (ESC + "0;0H");
         System.out.flush();
     }
-    
-    public static void main(String[] args) throws FileNotFoundException{
-        jouer();
-    }
+   
 }
