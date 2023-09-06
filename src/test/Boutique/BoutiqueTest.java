@@ -48,21 +48,21 @@ public class BoutiqueTest {
     }
 
     @Test
-    public void acheterNourritureTest(){
+    public void acheterNourritureTest() throws InterruptedException{
         b.acheterNourriture(4);
         assertEquals(50,App.joueur.getNourriture());
         assertEquals(35,App.joueur.getArgent());
     }
 
     @Test
-    public void acheterBonheurTest(){
+    public void acheterBonheurTest() throws InterruptedException{
         b.acheterBonheur(1);
         assertEquals(40,App.joueur.getBonheur());
         assertEquals(45,App.joueur.getArgent());
     }
 
     @Test
-    public void acheterToutTest(){
+    public void acheterToutTest() throws InterruptedException{
         b.acheterTout(9);
         assertEquals(70,App.joueur.getNourriture());
         assertEquals(0,App.joueur.getArgent());
