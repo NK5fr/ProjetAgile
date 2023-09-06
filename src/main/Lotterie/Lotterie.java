@@ -195,6 +195,7 @@ public class Lotterie implements Jeu{
         }else {
             this.defaite();
         }
+        this.baisserTemps();
     }
 
     @Override
