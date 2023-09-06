@@ -7,12 +7,15 @@ import main.App;
 import main.Jeu;
 import main.Joueur;
 import main.Bingo.bingo;
+import main.Lotterie.Lotterie;
 
 public class Machine_a_sous implements Jeu{
     
     private List<Anneau> machine;
 
     public static String rep;
+    private final static int DUREE = 4;
+    private final static int prix = 10;
 
     public Machine_a_sous() {
         this.machine = Arrays.asList(new Anneau(),new Anneau(),new Anneau());
@@ -52,7 +55,7 @@ public class Machine_a_sous implements Jeu{
     }
 
     @Override
-    public void jouer(Joueur joueur) {
+    public void jouer() {
         Machine_a_sous m = new Machine_a_sous();
         boolean continuer = true;
         
@@ -76,33 +79,44 @@ public class Machine_a_sous implements Jeu{
             
         }
         if ((m.machine.get(0).getIdx()) == (m.machine.get(1).getIdx()) && (m.machine.get(1).getIdx()) == (m.machine.get(2).getIdx())) {
-            this.victoire(joueur);
+            this.victoire();
         }else {
-            this.defaite(joueur);
+            this.defaite();
         }
     }
 
     @Override
-    public void victoire(Joueur joueur) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'victoire'");
+    public void victoire() {
+        int récompense = 0;
+        if (this.machine.get(0).getIdx() == 0) {
+            récompense = (int) (Machine_a_sous.prix * 1.5);
+        }else if (this.machine.get(0).getIdx() == 1) {
+            récompense = (int) (Machine_a_sous.prix * 5);
+        }else if (this.machine.get(0).getIdx() == 2) {
+            récompense = (int) (Machine_a_sous.prix * 2);
+        }else if (this.machine.get(0).getIdx() == 3) {
+            récompense = (int) (Machine_a_sous.prix * 2.5);
+        }else if (this.machine.get(0).getIdx() == 4) {
+            récompense = (int) (Machine_a_sous.prix * 3);
+        }
+        System.out.println("Bravo vous avez gagner " +récompense*0.25 +"€");
+        System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+        App.joueur.setArgent(App.joueur.getArgent() + ((int) (argent*0.25)));
     }
 
     @Override
-    public void defaite(Joueur joueur) {
+    public void defaite() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'defaite'");
     }
 
     @Override
     public void baisserTemps() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'baisserTemps'");
+        App.jour.moinsTempsJour(Machine_a_sous.DUREE);
     }
 
     @Override
     public int duree() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'duree'");
+        return Machine_a_sous.DUREE;
     }
 }

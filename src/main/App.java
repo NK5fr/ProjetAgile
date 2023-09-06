@@ -2,6 +2,7 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 
+import main.Bingo.bingo;
 import main.Lotterie.Lotterie;
 
 public class App {
@@ -48,8 +49,8 @@ public class App {
         char c;
         while(continuer){
             clear();
-            System.out.println("Jour " + joueur.getNbJours()+ " | Argent - " + joueur.getArgent() + "€");
-            System.out.println("Heure " + jour.getTempsJour());
+            System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
+            System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
@@ -59,6 +60,8 @@ public class App {
             System.out.println("- la commande q permet de quitter ce menu");
             c = ecouterChar();
             if(c == 'b'){
+                bingo b = new bingo();
+                b.jouer();
                 
             }else if(c == 'j'){
                 
@@ -67,8 +70,12 @@ public class App {
             }else if(c == 'm'){
                 
             }else if(c == 'l'){
-                Lotterie l = new Lotterie();
-                l.jouer();
+                Jeu l = new Lotterie();
+                try {
+                    l.jouer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }else if(c == 'q'){
                 continuer = false;
             }
@@ -143,15 +150,11 @@ public class App {
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
         }else if(joueur.getArgent() < 0){
-            clear();
+            //clear();
             System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
         }
         Thread.sleep(3000);
-    }
-
-    public static void setJoueur(Joueur joueur) {
-        App.joueur = joueur;
     }
 }
