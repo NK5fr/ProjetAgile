@@ -49,7 +49,7 @@ public class App {
         afficher_barre("nourriture");
         System.out.print("Bonheur du joueur : ");
         System.out.print(joueur.getBonheur() );
-        afficher_barre("bohneur");
+        afficher_barre("bonheur");
         System.out.println();
         System.out.print("Nombre de jours passé : ");
         System.out.println(joueur.getNbJours());
@@ -271,10 +271,10 @@ public class App {
     }
 
     public static void afficher_barre(String barre){
-        if(barre.equals("bohneur")){
+        if(barre.equals("bonheur")){
             System.out.print("      " + Colors.setColor("green"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getBonheur() - 50){
+                if(i< joueur.getBonheur() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());
@@ -284,7 +284,7 @@ public class App {
         }else{
             System.out.print("      " + Colors.setColor("yellow"));
             for(int i=0; i< 50; i++){
-                if(i< joueur.getNourriture() - 50){
+                if(i< joueur.getNourriture() / 2){
                     System.out.print("\u2588");
                 }else{
                     System.out.print(Colors.resetColor());

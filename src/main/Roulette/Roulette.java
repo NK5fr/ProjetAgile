@@ -12,7 +12,7 @@ public class Roulette implements Jeu{
     
     private static int resultat;
     private final static int DUREE = 6;
-    private static String pari; // a voir sous quel forme on fait le pari
+    private static String pari;
     private static int argentParier;
     private static List<Integer> black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
     private static List<Integer> red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
@@ -71,71 +71,57 @@ public class Roulette implements Jeu{
     public static int Gain(){
         if(pari.equals("noir")){
             if(black.contains(resultat)){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("rouge")){
             if(red.contains(resultat)){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("pair")){
             if(resultat % 2 == 0){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("impair")){
             if(resultat % 2 != 0){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("moitie1")){
             if(resultat > 0 && resultat < 19){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("moitie2")){
             if(resultat > 18 && resultat < 37){
-                return argentParier * 1;
+                return argentParier * 2;
             }
         }else if(pari.equals("colonne1")){
             if(resultat % 3 == 1){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("colonne2")){
             if(resultat % 3 == 2){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("colonne3")){
             if(resultat % 3 == 0){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers1")){
             if(resultat > 0 && resultat < 13){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers2")){
             if(resultat > 12 && resultat < 25){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(pari.equals("tiers3")){
             if(resultat > 24 && resultat < 37){
-                return argentParier * 2;
+                return argentParier * 3;
             }
         }else if(Integer.parseInt(pari) == resultat){
-            return argentParier * 35;
+            return argentParier * 36;
         }
         return 0;
     }
-
-    /* public static void affichageRoulette(){
-        System.out.println(".----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ");
-        System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |");
-        System.out.println("| |  _______     | || |     ____     | || | _____  _____ | || |   _____      | || |  _________   | || |  _________   | || |  _________   | || |  _________   | |");
-        System.out.println("| | |_   __ \\    | || |   .'    `.   | || ||_   _||_   _|| || |  |_   _|     | || | |_   ___  |  | || | |  _   _  |  | || | |  _   _  |  | || | |_   ___  |  | |");
-        System.out.println("| |   | |__) |   | || |  /  .--.  \\  | || |  | |    | |  | || |    | |       | || |   | |_  \\_|  | || | |_/ | | \\_|  | || | |_/ | | \\_|  | || |   | |_  \\_|  | |");
-        System.out.println("| |   |  __ /    | || |  | |    | |  | || |  | '    ' |  | || |    | |   _   | || |   |  _|  _   | || |     | |      | || |     | |      | || |   |  _|  _   | |");
-        System.out.println("| |  _| |  \\ \\_  | || |  \\  `--'  /  | || |   \\ `--' /   | || |   _| |__/ |  | || |  _| |___/ |  | || |    _| |_     | || |    _| |_     | || |  _| |___/ |  | |");
-        System.out.println("| | |____| |___| | || |   `.____.'   | || |    `.__.'    | || |  |________|  | || | |_________|  | || |   |_____|    | || |   |_____|    | || | |_________|  | |");
-        System.out.println("| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |");
-        System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |");
-        System.out.println(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'");
-    } */
 
     public static void affichageTable(){
         System.out.println("                          __________ ");
