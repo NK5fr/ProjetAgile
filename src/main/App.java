@@ -6,9 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
@@ -137,8 +135,6 @@ public class App {
         clear();
         List<String> players = new ArrayList<>();
         List<Integer> scores = new ArrayList<>();
-        String name;
-        Integer score;
         try(Scanner scan = new Scanner(CLASSEMENT)){
             scan.useDelimiter("\n");
             while(scan.hasNext()){
