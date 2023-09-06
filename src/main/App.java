@@ -94,11 +94,19 @@ public class App {
                 }           
             }else if(c == 'j'){
                 BlackJack bj = new BlackJack(joueur);
-                try {
-                    bj.jouer();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                if(jour.getTempsJour() - bj.duree() < 0){
+                    clear();
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un blackJack dure 2 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    Thread.sleep(5000);
+                    System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
+                    Thread.sleep(5000);
+                }else{
+                    try {
+                        bj.jouer();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                } 
             }else if(c == 'r'){
                 Roulette r = new Roulette();
                 if(jour.getTempsJour() - r.duree() < 0){
