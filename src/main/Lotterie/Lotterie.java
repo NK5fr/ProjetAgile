@@ -206,6 +206,8 @@ public class Lotterie implements Jeu{
 
     @Override
     public void victoire() {
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         int argent = Lotterie.PRIX;
         if (Lotterie.nb_trouver == 6) {
             System.out.println("Bravo vous avez gagner " + argent +"€");

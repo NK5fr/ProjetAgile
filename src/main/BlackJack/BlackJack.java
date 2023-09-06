@@ -8,11 +8,11 @@ import main.Joueur;
 
 public class BlackJack implements Jeu{
 
-    private static final int DUREE = 4;
+    private static final int DUREE = 2;
 
-    public Scanner scanner = new Scanner(System.in);
+    public Scanner scanner = App.scanner;
 
-    
+
     public User player;
     public User dealer;
     public int bet;
@@ -105,9 +105,10 @@ public class BlackJack implements Jeu{
         this.playerDeal();
         if (this.player.userScore.isBusted()) {
             this.defaite();
+        } else {
+            this.showCards();
+            this.askForChoice();
         }
-        this.showCards();
-        this.askForChoice();
     }
 
     public void stand() throws InterruptedException {
@@ -126,11 +127,12 @@ public class BlackJack implements Jeu{
         }
     }
 
-    void payOut() {
-        if (this.player.hasBlackJack()) {
-            this.player.setCurrentMoney(this.player.getCurrentMoney()*2 + this.player.getCurrentMoney()/2);    
+    void payOut(boolean hasBlackJack) {
+        if (hasBlackJack) {
+            App.joueur.setArgent((int)(App.joueur.getArgent() + this.bet*1.5));
+        } else {
+            App.joueur.setArgent(App.joueur.getArgent() + this.bet);
         }
-        this.player.setCurrentMoney(this.player.getCurrentMoney()*2);
     }
 
     public void startOfGame() throws InterruptedException {
@@ -228,10 +230,15 @@ public class BlackJack implements Jeu{
                 System.out.println("Double BlackJack, tu ne gagne rien et ne perds rien");
                 return;
             }
+            payOut(true);
         }
-        System.out.println("TU AS GAGNER, le dealer a crever");
-        scanner.close();
-        payOut();
+        System.out.println("TU AS GAGNER, le dealer a crever \n(c'est le terme technique, il n'est pas mort mais ça veux dire qu'il dépasser les 21 points)");
+        payOut(false);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -249,7 +256,12 @@ public class BlackJack implements Jeu{
         else {
             System.out.println("Game Over,\nLe dealer a un score plus élevé que le tiens\nPas de chance!");
         }
-        scanner.close();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     @Override
