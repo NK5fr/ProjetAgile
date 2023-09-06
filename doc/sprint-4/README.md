@@ -6,7 +6,7 @@
 Peaufinage du Bingo (décomposer le code) et création fonction Test
 Création des consommable et de la boutique
 Peaufinage de la Roulette et création fonction Test
-Fin du système de machine à sous et début ajout couleur 
+Fin du système de machine à sous et début ajout couleur de la roulette
 Gérer les problèmes GIT et création de plusieurs class/interfaces du jeu principal
 Amélioration du Black Jack 
 
