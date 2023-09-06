@@ -12,7 +12,9 @@ public class App {
 
     private static void introduction(){
         clear();
-        System.out.print("Bonjour veillez entrer votre nom pour jouer : ");
+        bingo.afficherTitre("Debut");
+        System.out.println();
+        System.out.print("Bonjour veuillez entrer votre nom pour jouer : ");
         String nom = scanner.next();
         while(nom.equals("test")){
             System.out.print("Nom invalide recommencez : ");
@@ -36,7 +38,7 @@ public class App {
         System.out.print("Nombre de jours passé : ");
         System.out.println(joueur.getNbJours());
         System.out.println();
-        System.out.print("Entrez un caractère pour quittez : ");
+        System.out.print("Entrez un caractère pour quitter : ");
         scanner.next();
     }
 
@@ -52,17 +54,19 @@ public class App {
             System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
             System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
             System.out.println("Jeux possibles :");
+            System.out.println();
+            bingo.afficherTitre("Presentation");
+            System.out.println();
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
             System.out.println("- la commande r permet de jouer à la Roulette");
             System.out.println("- la commande m permet de jouer à la Machine à sous");
-            System.out.println("- la commande l permet de jouer à la lotterie");
+            System.out.println("- la commande l permet de jouer à la Loterie");
             System.out.println("- la commande q permet de quitter ce menu");
             c = ecouterChar();
             if(c == 'b'){
                 bingo b = new bingo();
-                b.jouer();
-                
+                b.jouer();            
             }else if(c == 'j'){
                 
             }else if(c == 'r'){
