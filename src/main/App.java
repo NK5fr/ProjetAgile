@@ -2,6 +2,7 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 
+import main.Bingo.bingo;
 import main.Lotterie.Lotterie;
 
 public class App {
@@ -59,6 +60,8 @@ public class App {
             System.out.println("- la commande q permet de quitter ce menu");
             c = ecouterChar();
             if(c == 'b'){
+                bingo b = new bingo();
+                b.jouer();
                 
             }else if(c == 'j'){
                 
@@ -147,7 +150,7 @@ public class App {
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
         }else if(joueur.getArgent() < 0){
-            clear();
+            //clear();
             System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
