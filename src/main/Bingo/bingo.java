@@ -85,6 +85,7 @@ public class bingo implements Jeu{
             System.out.println("Vous avez gagné !");
             System.out.println();
             App.joueur.setArgent(App.joueur.getArgent() + 100);
+            this.baisserTemps();
         }
     }
 
@@ -92,6 +93,7 @@ public class bingo implements Jeu{
         if(trouve1.contains(false)){
             System.out.println("Vous avez perdu...");
             System.out.println();
+            this.baisserTemps();
         }
     }
 
