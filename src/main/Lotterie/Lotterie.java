@@ -15,6 +15,7 @@ public class Lotterie implements Jeu{
     private List<Integer> predictionBoules;
     private List<Integer> tirages;
 
+    private static int ammende = 1_000;
     private static int nb_trouver = 0;
     private static int max_boules = 45;
     private final static int PRIX = 5_000;
