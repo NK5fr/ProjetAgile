@@ -1,8 +1,10 @@
-package test.Consommable;
+package test.Boutique;
 
 import main.App;
 import main.Joueur;
+import main.Boutique.Boutique;
 import main.Consommable.Bonheur;
+import main.Roulette.Roulette;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +17,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
-public class BonheurTest {
-    
-    private Bonheur cloche;
+public class BoutiqueTest {
+
+    Boutique b;
     private Joueur joueurAppInitiale;
 
     @BeforeAll
@@ -32,7 +34,7 @@ public class BonheurTest {
 
     @BeforeEach
 	public void beforeATest() {
-		cloche = new Bonheur(10, 30, "cloche");
+		b = new Boutique();
 
         joueurAppInitiale = App.joueur;
         Joueur j1 = new Joueur("test",40,50,30,1);
@@ -46,17 +48,23 @@ public class BonheurTest {
     }
 
     @Test
-    public void effetTest(){
-        assertEquals("Ceci est un cloche qui coute 30 pour gagner 10 point de bonheur.",cloche.effet());
+    public void acheterNourritureTest() throws InterruptedException{
+        b.acheterNourriture(4);
+        assertEquals(50,App.joueur.getNourriture());
+        assertEquals(35,App.joueur.getArgent());
     }
 
     @Test
-    public void acheteTest() throws InterruptedException{
-        assertTrue(cloche.achete());
+    public void acheterBonheurTest() throws InterruptedException{
+        b.acheterBonheur(1);
         assertEquals(40,App.joueur.getBonheur());
-        assertEquals(20,App.joueur.getArgent());
-        assertFalse(cloche.achete());
-        assertEquals(40,App.joueur.getBonheur());
-        assertEquals(20,App.joueur.getArgent());
+        assertEquals(45,App.joueur.getArgent());
+    }
+
+    @Test
+    public void acheterToutTest() throws InterruptedException{
+        b.acheterTout(9);
+        assertEquals(70,App.joueur.getNourriture());
+        assertEquals(0,App.joueur.getArgent());
     }
 }

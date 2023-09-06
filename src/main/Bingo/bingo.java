@@ -2,7 +2,6 @@ package main.Bingo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -49,12 +48,11 @@ public class bingo implements Jeu{
     }
 
     public void tricher(){
-        if (nbtriche == 0){
+        nbtriche ++;
+        if (nbtriche == 1){
             triche = 30;
-            nbtriche ++;
-        }else{
+        }else if(nbtriche>1){
             triche += 10;
-            nbtriche ++;
         }
         grille1.set(g1, "  ");
         trouve1.set(g1, true);
@@ -81,18 +79,23 @@ public class bingo implements Jeu{
     }
 
     public void victoire(){
+        App.joueur.setBonheur(App.joueur.getBonheur() + 10);
         if(!trouve1.contains(false)){
             System.out.println("Vous avez gagné !");
             System.out.println();
             App.joueur.setArgent(App.joueur.getArgent() + 100);
+            this.baisserTemps();
         }
     }
 
     public void defaite(){
+        App.joueur.setBonheur(App.joueur.getBonheur() - 10);
         if(trouve1.contains(false)){
             System.out.println("Vous avez perdu...");
             System.out.println();
+            this.baisserTemps();
         }
+        App.joueur.setBonheur(App.joueur.getBonheur() - 5);
     }
 
     public void lancer(){

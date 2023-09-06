@@ -16,9 +16,12 @@ public class Bonheur extends Consommable{
         return "Ceci est un " + this.getNom() + " qui coute " + getPrix() + " pour gagner " + bonheur +" point de bonheur.";
     }
 
-    public void achete(){
-        super.achete();
-        int nouv_bonheur = App.joueur.getBonheur() + bonheur;
-        App.joueur.setBonheur(nouv_bonheur);
+    public boolean achete() throws InterruptedException{
+        if(super.achete()){
+            int nouv_bonheur = App.joueur.getBonheur() + bonheur;
+            App.joueur.setBonheur(nouv_bonheur);
+            return true;
+        }
+        return false;
     }
 }
