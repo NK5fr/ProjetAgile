@@ -271,7 +271,7 @@ public class App {
     }
 
     public static void afficher_barre(String barre){
-        if(barre.equals("bohneur")){
+        if(barre.equals("bonheur")){
             System.out.print("      " + Colors.setColor("green"));
             for(int i=0; i< 50; i++){
                 if(i< joueur.getBonheur() - 50){

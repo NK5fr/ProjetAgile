@@ -28,8 +28,7 @@ public class bingo implements Jeu{
     private static final int DUREE = 12;
     public static int triche = 0;
     public static int nbtriche = 0;
-
-
+    public static char c;
 
     public static void afficherTitre(String nom){
         File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "affichage" + File.separator + nom + ".txt");
@@ -65,18 +64,26 @@ public class bingo implements Jeu{
     }
     
     public void jouer() {
-        //clear();
-        App.joueur.setArgent(App.joueur.getArgent() - 20);
-        afficherTitre("Bingo");
-        create_grille();
-        System.out.println();
-        System.out.println("Voici ta grille : ");
-        affichage_grille(grille1);
-        System.out.println("Le jeu commence ! ");
-        lancer();
-        System.out.println();
-        victoire();
-        defaite();
+        clear();
+        System.out.println("Voulez-vous acheter une grille à 20€ ? (o/n)");
+        c = App.ecouterChar();
+        while(c != 'o' && c != 'n'){
+            System.out.println("Caractère invalide !");
+            c = App.ecouterChar();
+        }
+        if (c == 'o'){
+            App.joueur.setArgent(App.joueur.getArgent() - 20);
+            afficherTitre("Bingo");
+            create_grille();
+            System.out.println();
+            System.out.println("Voici ta grille : ");
+            affichage_grille(grille1);
+            System.out.println("Le jeu commence ! ");
+            lancer();
+            System.out.println();
+            victoire();
+            defaite();
+        }
     }
 
     public void victoire(){
