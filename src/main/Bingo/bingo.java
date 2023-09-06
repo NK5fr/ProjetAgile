@@ -2,7 +2,6 @@ package main.Bingo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -94,6 +93,7 @@ public class bingo implements Jeu{
             System.out.println();
             this.baisserTemps();
         }
+        App.joueur.setBonheur(App.joueur.getBonheur() - 5);
     }
 
     public void lancer(){
