@@ -140,7 +140,7 @@ public class Lotterie implements Jeu{
 
     @Override
     public void tricher() {
-        if (RAND.nextInt(4) == 1) {
+        if (RAND.nextInt(4) != 1) {
             System.out.println("Vous êtes fait attraper Vous devez payez " + Lotterie.ammende + "€");
             App.joueur.setArgent(App.joueur.getArgent() - Lotterie.ammende);
             defaite();
