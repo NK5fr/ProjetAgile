@@ -25,3 +25,7 @@ Problème technique avec VsCode
 
 ### PDCA
 
+Nous voulons améliorer le code des mini-jeux
+Nous pouvons mesurer ca au nombre de bug
+Nous allons faire des amélioration technique en prenant en considération les différentes issues des jeux
+Nous allons vérifier avec des tests 

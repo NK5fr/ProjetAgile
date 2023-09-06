@@ -6,9 +6,9 @@ public interface Jeu {
 
     public void jouer();
 
-    public void victoire(Joueur joueur);
+    public void victoire();
 
-    public void defaite(Joueur joueur);
+    public void defaite();
 
     public void baisserTemps();
 

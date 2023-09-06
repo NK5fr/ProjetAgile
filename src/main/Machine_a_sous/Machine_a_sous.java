@@ -3,7 +3,12 @@ package main.Machine_a_sous;
 import java.util.Arrays;
 import java.util.List;
 
-public class Machine_a_sous{
+import main.App;
+import main.Jeu;
+import main.Joueur;
+import main.Bingo.bingo;
+
+public class Machine_a_sous implements Jeu{
     
     private List<Anneau> machine;
 
@@ -39,10 +44,20 @@ public class Machine_a_sous{
             }
         }
     }
-    public static void main(String[] args) throws InterruptedException{
+
+    @Override
+    public void tricher() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tricher'");
+    }
+
+    @Override
+    public void jouer(Joueur joueur) {
         Machine_a_sous m = new Machine_a_sous();
         boolean continuer = true;
         
+        bingo.afficherTitre("MAS");
+ 
         while (continuer) {
             m.roll();
             Thread t = new TextInputObject();
@@ -54,13 +69,40 @@ public class Machine_a_sous{
             if (!m.machine.get(2).isRolling()) {
                 continuer = false;
             }
-            Thread.sleep(Anneau.SPEED);
+            try {
+                Thread.sleep(Anneau.SPEED);
+            } catch (Exception ignored) {}
+            
             
         }
         if ((m.machine.get(0).getIdx()) == (m.machine.get(1).getIdx()) && (m.machine.get(1).getIdx()) == (m.machine.get(2).getIdx())) {
-            System.out.println("Victoire");
+            this.victoire(joueur);
         }else {
-            System.out.println("Defaite");
+            this.defaite(joueur);
         }
+    }
+
+    @Override
+    public void victoire(Joueur joueur) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'victoire'");
+    }
+
+    @Override
+    public void defaite(Joueur joueur) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'defaite'");
+    }
+
+    @Override
+    public void baisserTemps() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'baisserTemps'");
+    }
+
+    @Override
+    public int duree() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'duree'");
     }
 }

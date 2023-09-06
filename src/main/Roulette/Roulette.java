@@ -1,20 +1,19 @@
 package main.Roulette;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 import main.App;
+import main.Bingo.bingo;
 
 public class Roulette{
     
     private static int resultat;
     private static String pari; // a voir sous quel forme on fait le pari
     private static int argentParier;
-    private static List black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
-    private static List red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
+    private static List<Integer> black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
+    private static List<Integer> red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
 
     public Roulette(){
         Random rand = new Random();
@@ -107,7 +106,7 @@ public class Roulette{
         return 0;
     }
 
-    public static void affichageRoulette(){
+    /* public static void affichageRoulette(){
         System.out.println(".----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ");
         System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |");
         System.out.println("| |  _______     | || |     ____     | || | _____  _____ | || |   _____      | || |  _________   | || |  _________   | || |  _________   | || |  _________   | |");
@@ -119,27 +118,27 @@ public class Roulette{
         System.out.println("| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |");
         System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |");
         System.out.println(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'");
-    }
+    } */
 
     public static void affichageTable(){
         System.out.println("                          __________ ");
         System.out.println("                          |   0    |  ");
         System.out.println("                 |----------------------------|");
-        System.out.println("                 |        |1 |2 |3 |          |");
-        System.out.println("                 |        |4 |5 |6 |          |");
-        System.out.println("                 | tiers1 |7 |8 |9 |          |");
-        System.out.println("                 |        |10|11|12|  moitie1 |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"1"+Colors.resetColor()+" |"+Colors.setColor("black")+"2"+Colors.resetColor()+" |"+Colors.setColor("red")+"3"+Colors.resetColor() + " |          |");
+        System.out.println("                 |        |"+Colors.setColor("black")+"4"+Colors.resetColor() +" |"+Colors.setColor("red")+"5"+Colors.resetColor()+" |"+Colors.setColor("black")+"6"+Colors.resetColor() +" |          |");
+        System.out.println("                 | tiers1 |"+Colors.setColor("red")+"7"+Colors.resetColor()+" |"+Colors.setColor("black")+"8"+Colors.resetColor() +" |"+Colors.setColor("red")+"9"+Colors.resetColor() + " |          |");
+        System.out.println("                 |        |"+Colors.setColor("black")+"10"+Colors.resetColor()+"|"+Colors.setColor("black")+"11"+Colors.resetColor()+"|"+Colors.setColor("red")+"12"+Colors.resetColor()+"|  moitie1 |");
         System.out.println("                 |-----------------|          | ");
-        System.out.println("                 |        |13|14|15|          |");
-        System.out.println("                 | tiers2 |16|17|18|          |");
+        System.out.println("                 |        |"+Colors.setColor("black")+"13"+Colors.resetColor()+"|"+Colors.setColor("red")+"14"+Colors.resetColor()+"|"+Colors.setColor("black")+"15"+Colors.resetColor()+"|          |");
+        System.out.println("                 | tiers2 |"+Colors.setColor("red")+"16"+Colors.resetColor()+"|"+Colors.setColor("black")+"17"+Colors.resetColor()+"|"+Colors.setColor("red")+"18"+Colors.resetColor()+"|          |");
         System.out.println("                 |        |-------------------| ");
-        System.out.println("                 |        |19|20|21|          |");
-        System.out.println("                 |        |22|23|24|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"19"+Colors.resetColor()+"|"+Colors.setColor("black")+"20"+Colors.resetColor()+"|"+Colors.setColor("red")+"21"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("black")+"22"+Colors.resetColor()+"|"+Colors.setColor("red")+"23"+Colors.resetColor()+"|"+Colors.setColor("black")+"24"+Colors.resetColor()+"|          |");
         System.out.println("                 |-----------------|          |");
-        System.out.println("                 |        |25|26|27|  moitie2 |");
-        System.out.println("                 | tiers3 |28|29|30|          |");
-        System.out.println("                 |        |31|32|33|          |");
-        System.out.println("                 |        |34|35|36|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"25"+Colors.resetColor()+"|"+Colors.setColor("black")+"26"+Colors.resetColor()+"|"+Colors.setColor("red")+"27"+Colors.resetColor()+"|  moitie2 |");
+        System.out.println("                 | tiers3 |"+Colors.setColor("black")+"28"+Colors.resetColor()+"|"+Colors.setColor("black")+"29"+Colors.resetColor()+"|"+Colors.setColor("red")+"30"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("black")+"31"+Colors.setColor("black")+"|"+Colors.setColor("red")+"32"+Colors.resetColor()+"|"+Colors.setColor("black")+"33"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"34"+Colors.resetColor()+"|"+Colors.setColor("black")+"35"+Colors.resetColor()+"|"+Colors.setColor("red")+"36"+Colors.resetColor()+"|          |");
         System.out.println("                 |________|__|__|__|__________| ");
         System.out.println("                          |c1|c2|c3|    ");
     }
@@ -147,9 +146,9 @@ public class Roulette{
 
 
     public static void main(String[] args){
-        Roulette r = new Roulette();
+        //Roulette r = new Roulette();
 
-        affichageRoulette();
+        bingo.afficherTitre("Roulette");
 
         Pari();
         
@@ -181,19 +180,19 @@ public class Roulette{
         Roulette.argentParier = argentParier;
     }
 
-    public static List getBlack() {
+    public static List<Integer> getBlack() {
         return black;
     }
 
-    public static void setBlack(List black) {
+    public static void setBlack(List<Integer> black) {
         Roulette.black = black;
     }
 
-    public static List getRed() {
+    public static List<Integer> getRed() {
         return red;
     }
 
-    public static void setRed(List red) {
+    public static void setRed(List<Integer> red) {
         Roulette.red = red;
     }
 

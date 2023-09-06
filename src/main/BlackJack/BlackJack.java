@@ -7,15 +7,15 @@ public class BlackJack {
     public Scanner scanner = new Scanner(System.in);
 
     
-    User player;
-    User dealer;
-    int bet;
-    CardDeck deck;
+    public User player;
+    public User dealer;
+    public int bet;
+    public CardDeck deck;
 
     
     public BlackJack(User user, CardDeck deck, User dealer, int bet) {
         this.player = user;
-        this.player.setDenomination("player");
+        this.player.setDenomination("joueur");
         this.dealer = dealer;
         this.deck = deck;
         this.bet = bet;
@@ -50,7 +50,7 @@ public class BlackJack {
 
     
 
-    void startingDeal() {
+    public void startingDeal() {
         this.playerDeal();
         this.dealerDeal();
         this.playerDeal();
@@ -66,14 +66,14 @@ public class BlackJack {
 
     void askForChoice() throws InterruptedException {
         String choice = "";
-        while (!(choice.equals("H")) && !(choice.equals("S"))) {
-            System.out.println("H- Hit");
-            System.out.println("S- Stand");
+        while (!(choice.equals("T")) && !(choice.equals("R"))) {
+            System.out.println("T- Tirer");
+            System.out.println("R- Rester");
             choice = scanner.next().toUpperCase();
         }
-        if (choice.equals("H")) {
+        if (choice.equals("T")) {
             this.hit();
-        } else if (choice.equals("S")) {
+        } else if (choice.equals("R")) {
             this.stand();
         }
     }
@@ -81,42 +81,40 @@ public class BlackJack {
     void askForBet() {
         int choice = 0;
         while (choice > this.player.currentMoney || choice <= 0) {
-            System.out.println("How much will you risk");
+            System.out.println("Combien allez-vous risquer");
             choice = scanner.nextInt();
         }
         bet(choice);
     }
 
-    void hit() throws InterruptedException {
+    public boolean hit() throws InterruptedException {
         this.playerDeal();
         if (this.player.userScore.isBusted()) {
-            this.gameOver();
-            return;
+            return this.gameOver();
         }
         this.showCards();
         this.askForChoice();
+        return true;
     }
 
-    void stand() throws InterruptedException {
+    public boolean stand() throws InterruptedException {
         this.dealer.setAllCardsVisible();
         this.dealer.calculateScore();
         this.showCards();
         do {
-            Thread.sleep(100);
+            Thread.sleep(1000);
             this.dealerDeal();
             this.showCards();
         } while (this.dealer.getUserScore() < this.player.getUserScore() && !(this.dealer.isBusted()));
-        if (this.dealer.getUserScore() > this.player.getUserScore()) {
-            if (this.dealer.isBusted()) {
-                this.gameWon();
-            } else {
-                this.gameOver();
-            }
+        if (this.dealer.isBusted()) {
+            return this.gameWon();
+        } else {
+            return this.gameOver();
         }
     }
 
     
-    void gameOver() {
+    boolean gameOver() {
         this.dealer.setAllCardsVisible();
         this.dealer.calculateScore();
         this.showCards();
@@ -127,14 +125,16 @@ public class BlackJack {
             System.out.println("Game Over,\nYour score is inferior to the dealer's\nToo bad!");
         }
         scanner.close();
+        return false;
     }
 
-    void gameWon() {
+    boolean gameWon() {
         System.out.println("YOU WON, the dealer busted");
         scanner.close();
+        return true;
     }
 
-    void startOfGame() throws InterruptedException {
+    public void startOfGame() throws InterruptedException {
         System.out.println("\n" + //
                 "\n" + //
                 " .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \n" + //
@@ -163,9 +163,49 @@ public class BlackJack {
                 "");
         this.deck.shuffle();
         System.out.println("You currently have "+ this.player.currentMoney+" $ in your account");
-        //askForBet();
+        askForBet();
         startingDeal();
         showCards();
         askForChoice();
+    }
+
+    public Scanner getScanner() {
+        return scanner;
+    }
+
+    public void setScanner(Scanner scanner) {
+        this.scanner = scanner;
+    }
+
+    public User getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(User player) {
+        this.player = player;
+    }
+
+    public User getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(User dealer) {
+        this.dealer = dealer;
+    }
+
+    public int getBet() {
+        return bet;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
+    public CardDeck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(CardDeck deck) {
+        this.deck = deck;
     }
 }

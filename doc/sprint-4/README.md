@@ -26,5 +26,5 @@ La gestion des consommables
 ### PDCA
 Nous voulons corriger les problèmes avec GIT 
 Nous pouvons mesurer ca au nombre de bug 
-Faire des push/pull/commit plus régulier 
+Nous allons faire des push/pull/commit plus régulier 
 Nous allons vérifier ca grâce à la suite du developpement du jeu 
