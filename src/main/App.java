@@ -3,6 +3,7 @@ import java.io.File;
 import java.util.Scanner;
 
 import main.Bingo.bingo;
+import main.BlackJack.BlackJack;
 import main.Lotterie.Lotterie;
 
 public class App {
@@ -50,7 +51,7 @@ public class App {
         while(continuer){
             clear();
             System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
-            System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
+            System.out.println("Argent -> " + joueur.getArgent() + "€");
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
@@ -64,7 +65,12 @@ public class App {
                 b.jouer();
                 
             }else if(c == 'j'){
-                
+                BlackJack bj = new BlackJack(joueur);
+                try {
+                    bj.jouer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }else if(c == 'r'){
                 
             }else if(c == 'm'){
