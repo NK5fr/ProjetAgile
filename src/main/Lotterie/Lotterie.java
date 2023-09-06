@@ -165,6 +165,7 @@ public class Lotterie implements Jeu{
             c = App.ecouterChar();
             if (c == 'o') {
                 this.tricher();
+                System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
                 continuer = false;
             }else if (c =='n') {
                 continuer = false;
@@ -176,6 +177,9 @@ public class Lotterie implements Jeu{
         l.tirage();
         System.out.println("Le tirages est:" + l.getTirages());
         System.out.println("Votre prédiction est:" + l.getPredictionBoules());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
         for (Integer integer : l.getTirages()) {
             if (l.getPredictionBoules().contains(integer)){
                 trouver = trouver && true;
@@ -195,11 +199,17 @@ public class Lotterie implements Jeu{
     public void victoire() {
         System.out.println("Bravo vous avez gagner " + Lotterie.PRIX +"€");
         App.joueur.setArgent(App.joueur.getArgent() + Lotterie.PRIX);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
     }
 
     @Override
     public void defaite() {
         System.out.println("Dommage vous avez perdu");
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {}
     }
 
     @Override

@@ -2,6 +2,8 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 
+import main.Lotterie.Lotterie;
+
 public class App {
     public static Scanner scanner = new Scanner(System.in);
     public static Joueur joueur;
@@ -63,7 +65,8 @@ public class App {
             }else if(c == 'm'){
                 
             }else if(c == 'l'){
-                ;
+                Lotterie l = new Lotterie();
+                l.jouer();
             }else if(c == 'q'){
                 continuer = false;
             }
