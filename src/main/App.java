@@ -49,7 +49,7 @@ public class App {
         afficher_barre("nourriture");
         System.out.print("Bonheur du joueur : ");
         System.out.print(joueur.getBonheur() );
-        afficher_barre("bohneur");
+        afficher_barre("bonheur");
         System.out.println();
         System.out.print("Nombre de jours passé : ");
         System.out.println(joueur.getNbJours());
