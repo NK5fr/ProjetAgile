@@ -14,10 +14,12 @@ public class Lotterie implements Jeu{
     private List<Integer> boules;
     private List<Integer> predictionBoules;
     private List<Integer> tirages;
-    
+
+    private static int ammende = 1_000;
+    private static int nb_trouver = 0;
     private static int max_boules = 45;
-    private final static int PRIX = 1_000_000;
-    private final static int PRIX_TICKET = 1_000;
+    private final static int PRIX = 5_000;
+    private final static int PRIX_TICKET = 5;
     private final static int DUREE = 2;
     private final static Random RAND = new Random();
 
@@ -138,6 +140,11 @@ public class Lotterie implements Jeu{
 
     @Override
     public void tricher() {
+        if (RAND.nextInt(4) != 1) {
+            System.out.println("Vous êtes fait attraper Vous devez payez " + Lotterie.ammende + "€");
+            App.joueur.setArgent(App.joueur.getArgent() - Lotterie.ammende);
+            defaite();
+        }
         Lotterie.setMax_boules(25);
     }
 
@@ -183,6 +190,7 @@ public class Lotterie implements Jeu{
         for (Integer integer : l.getTirages()) {
             if (l.getPredictionBoules().contains(integer)){
                 trouver = trouver && true;
+                Lotterie.nb_trouver++;
             }
             else {
                 trouver = false;
@@ -193,12 +201,29 @@ public class Lotterie implements Jeu{
         }else {
             this.defaite();
         }
+        this.baisserTemps();
     }
 
     @Override
     public void victoire() {
-        System.out.println("Bravo vous avez gagner " + Lotterie.PRIX +"€");
-        App.joueur.setArgent(App.joueur.getArgent() + Lotterie.PRIX);
+        int argent = Lotterie.PRIX;
+        if (Lotterie.nb_trouver == 6) {
+            System.out.println("Bravo vous avez gagner " + argent +"€");
+            System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+            App.joueur.setArgent(App.joueur.getArgent() + argent);
+        } else if (Lotterie.nb_trouver == 5) {
+            System.out.println("Bravo vous avez gagner " +((int) (argent*0.75)) +"€");
+            System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+            App.joueur.setArgent(App.joueur.getArgent() + ((int) (argent*0.75)));
+        } else if (Lotterie.nb_trouver == 4) {
+            System.out.println("Bravo vous avez gagner " +((int) (argent*0.5)) +"€");
+            System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+            App.joueur.setArgent(App.joueur.getArgent() + ((int) (argent*0.5)));
+        } else if (Lotterie.nb_trouver == 3) {
+            System.out.println("Bravo vous avez gagner " +((int) (argent*0.25)) +"€");
+            System.out.println("Vous avez " + App.joueur.getArgent() + "€");
+            App.joueur.setArgent(App.joueur.getArgent() + ((int) (argent*0.25)));
+        }
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ignored) {}
@@ -207,6 +232,7 @@ public class Lotterie implements Jeu{
     @Override
     public void defaite() {
         System.out.println("Dommage vous avez perdu");
+        System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         try {
             Thread.sleep(3000);
         } catch (InterruptedException ignored) {}
