@@ -49,12 +49,11 @@ public class bingo implements Jeu{
     }
 
     public void tricher(){
-        if (nbtriche == 0){
+        nbtriche ++;
+        if (nbtriche == 1){
             triche = 30;
-            nbtriche ++;
-        }else{
+        }else if(nbtriche>1){
             triche += 10;
-            nbtriche ++;
         }
         grille1.set(g1, "  ");
         trouve1.set(g1, true);
