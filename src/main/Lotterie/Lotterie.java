@@ -170,7 +170,7 @@ public class Lotterie implements Jeu{
             System.out.println("Voulez vous voir les régles (r)");
             System.out.println("Voulez vous continuer (c)");
             c = App.ecouterChar();
-            if (c == 'o') {
+            if (c == 't') {
                 triche = true;
                 System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
                 continuer = false;
