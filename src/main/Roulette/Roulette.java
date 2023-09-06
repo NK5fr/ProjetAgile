@@ -5,14 +5,15 @@ import java.util.List;
 import java.util.Random;
 
 import main.App;
+import main.Bingo.bingo;
 
 public class Roulette{
     
     private static int resultat;
     private static String pari; // a voir sous quel forme on fait le pari
     private static int argentParier;
-    private static List black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
-    private static List red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
+    private static List<Integer> black = Arrays.asList(2,4,6,8,10,11,13,15,17,20,22,24,26,28,29,31,33,35);
+    private static List<Integer> red = Arrays.asList(1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36);
 
     public Roulette(){
         Random rand = new Random();
@@ -105,7 +106,7 @@ public class Roulette{
         return 0;
     }
 
-    public static void affichageRoulette(){
+    /* public static void affichageRoulette(){
         System.out.println(".----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------. ");
         System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |");
         System.out.println("| |  _______     | || |     ____     | || | _____  _____ | || |   _____      | || |  _________   | || |  _________   | || |  _________   | || |  _________   | |");
@@ -117,7 +118,7 @@ public class Roulette{
         System.out.println("| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |");
         System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |");
         System.out.println(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'");
-    }
+    } */
 
     public static void affichageTable(){
         System.out.println("                          __________ ");
@@ -145,9 +146,9 @@ public class Roulette{
 
 
     public static void main(String[] args){
-        Roulette r = new Roulette();
+        //Roulette r = new Roulette();
 
-        affichageRoulette();
+        bingo.afficherTitre("Roulette");
 
         Pari();
         
@@ -179,19 +180,19 @@ public class Roulette{
         Roulette.argentParier = argentParier;
     }
 
-    public static List getBlack() {
+    public static List<Integer> getBlack() {
         return black;
     }
 
-    public static void setBlack(List black) {
+    public static void setBlack(List<Integer> black) {
         Roulette.black = black;
     }
 
-    public static List getRed() {
+    public static List<Integer> getRed() {
         return red;
     }
 
-    public static void setRed(List red) {
+    public static void setRed(List<Integer> red) {
         Roulette.red = red;
     }
 
