@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import main.App;
+import main.Jeu;
+import main.Joueur;
+import main.Bingo.bingo;
 
 
-public class Lotterie {
+public class Lotterie implements Jeu{
 
     private List<Integer> boules;
     private List<Integer> predictionBoules;
@@ -118,20 +121,17 @@ public class Lotterie {
         this.tirages = tirer;
     }
 
-    public static void main(String[] args) {
+    @Override
+    public void tricher() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'tricher'");
+    }
+
+    @Override
+    public void jouer(Joueur joueur) {
         boolean trouver = true;
         int nb_trouver = 0;
-        System.out.println(".----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------."); 
-        System.out.println("| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |");
-        System.out.println("| |   _____      | || |     ____     | || |  _________   | || |  _________   | || |  _________   | || |  _______     | || |     _____    | || |  _______     | || |  _________   | |");
-        System.out.println("| |  |_   _|     | || |   .'    `.   | || | |  _   _  |  | || | |  _   _  |  | || | |_   ___  |  | || | |_   __ \\    | || |    |_   _|   | || | |_   __ \\    | || | |_   ___  |  | |");
-        System.out.println("| |    | |       | || |  /  .--.  \\  | || | |_/ | | \\_|  | || | |_/ | | \\_|  | || |   | |_  \\_|  | || |   | |__) |   | || |      | |     | || |   | |__) |   | || |   | |_  \\_|  | |");
-        System.out.println("| |    | |   _   | || |  | |    | |  | || |     | |      | || |     | |      | || |   |  _|  _   | || |   |  __ /    | || |      | |     | || |   |  __ /    | || |   |  _|  _   | |");
-        System.out.println("| |   _| |__/ |  | || |  \\  `--'  /  | || |    _| |_     | || |    _| |_     | || |  _| |___/ |  | || |  _| |  \\ \\_  | || |     _| |_    | || |  _| |  \\ \\_  | || |  _| |___/ |  | |");
-        System.out.println("| |  |________|  | || |   `.____.'   | || |   |_____|    | || |   |_____|    | || | |_________|  | || | |____| |___| | || |    |_____|   | || | |____| |___| | || | |_________|  | |");
-        System.out.println("| |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |");
-        System.out.println("| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |");
-        System.out.println(" '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------' ");
+        bingo.afficherTitre("Loterie");
         Lotterie l = new Lotterie();
         l.input_user();
         l.tirage();
@@ -147,9 +147,33 @@ public class Lotterie {
             }
         }
         if (trouver) {
-            System.out.println("Bravo vous avez tout trouver");
+            this.victoire(joueur);
         }else {
-            System.out.println("Dommage vous n'avez trouver que " + nb_trouver + " boules");
+            this.defaite(joueur);
         }
+    }
+
+    @Override
+    public void victoire(Joueur joueur) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'victoire'");
+    }
+
+    @Override
+    public void defaite(Joueur joueur) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'defaite'");
+    }
+
+    @Override
+    public void baisserTemps() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'baisserTemps'");
+    }
+
+    @Override
+    public int duree() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'duree'");
     }
 }

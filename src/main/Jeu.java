@@ -4,7 +4,7 @@ public interface Jeu {
 
     public void tricher();
 
-    public void jouer();
+    public void jouer(Joueur joueur);
 
     public void victoire(Joueur joueur);
 
