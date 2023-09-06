@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class App {
     public static Scanner scanner = new Scanner(System.in);
-    private static Joueur joueur;
+    public static Joueur joueur;
     public static Jour jour;
 
     private static void introduction(){
