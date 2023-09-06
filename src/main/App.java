@@ -12,7 +12,9 @@ import java.util.Scanner;
 import main.Bingo.bingo;
 import main.Boutique.Boutique;
 import main.Lotterie.Lotterie;
+import main.Machine_a_sous.Machine_a_sous;
 import main.Roulette.Colors;
+import main.Roulette.Roulette;
 
 public class App {
     public static Scanner scanner = new Scanner(System.in);
@@ -60,7 +62,7 @@ public class App {
         b.menu();
     }
 
-    private static void jouerArgent(){
+    private static void jouerArgent() throws InterruptedException{
         boolean continuer = true;
         char c;
         while(continuer){
@@ -80,20 +82,54 @@ public class App {
             c = ecouterChar();
             if(c == 'b'){
                 bingo b = new bingo();
-                b.jouer();            
+                if(jour.getTempsJour() - b.duree() < 0){
+                    clear();
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, un bingo dure 12 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    Thread.sleep(5000);
+                    System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
+                    Thread.sleep(5000);
+                }else{
+                    b.jouer(); 
+                }           
             }else if(c == 'j'){
                 
             }else if(c == 'r'){
-                
+                Roulette r = new Roulette();
+                if(jour.getTempsJour() - r.duree() < 0){
+                    clear();
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une roulette dure 6 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    Thread.sleep(5000);
+                    System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
+                    Thread.sleep(5000);
+                }else{
+                    r.jouer(); 
+                }               
             }else if(c == 'm'){
-                
+                Machine_a_sous m = new Machine_a_sous();
+                if(jour.getTempsJour() - m.duree() < 0){
+                    clear();
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une machine à sous dure 4 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    Thread.sleep(5000);
+                    System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
+                    Thread.sleep(5000);
+                }else{
+                    m.jouer();  
+                }                
             }else if(c == 'l'){
                 Jeu l = new Lotterie();
-                try {
-                    l.jouer();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                if(jour.getTempsJour() - l.duree() < 0){
+                    clear();
+                    System.out.println("Il ne vous reste plus assez de temps pour ce jeu, une lotterie dure 24 heures et il vous reste " + jour.getTempsJour() + "heures pour cette journée.");
+                    Thread.sleep(5000);
+                    System.out.println("Pour passer à la prochaine journée, revenez au menu principal et utilisez la commande \"passez le temps\".");
+                    Thread.sleep(5000);
+                }else{
+                    try {
+                        l.jouer();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } 
+                } 
             }else if(c == 'q'){
                 continuer = false;
             }
