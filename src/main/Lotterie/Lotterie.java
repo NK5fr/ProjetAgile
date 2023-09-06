@@ -162,6 +162,7 @@ public class Lotterie implements Jeu{
                 return;
             }
         }
+        baisserTemps();
         continuer = true;
         String z = "";
         while(continuer){

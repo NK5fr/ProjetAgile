@@ -73,6 +73,7 @@ public class Machine_a_sous implements Jeu{
                 return;
             }
         }
+        baisserTemps();
         continuer = true;
         while(continuer){
             App.clear();

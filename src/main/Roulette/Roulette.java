@@ -41,7 +41,13 @@ public class Roulette implements Jeu{
             + "\n" + "- Une colonne (taper colonne1, colonne2 ou colonne3)"
             + "\n" + "- Un tiers (taper tiers1, tiers2, tiers3)");
             choix = App.scanner.next();
-            if(choix.equals("noir") || choix.equals("rouge") || choix.equals("pair") || choix.equals("impair") || choix.equals("colonne1") || choix.equals("colonne2") || choix.equals("colonne3") || choix.equals("moitie1") || choix.equals("moitie2") || choix.equals("tiers1") || choix.equals("tiers2") || choix.equals("tiers3") || (Integer.parseInt(choix) >= 0 && Integer.parseInt(choix) <=36) ){
+            Boolean nombreValide = false;
+            try{
+                nombreValide = Integer.parseInt(choix) >= 0 && Integer.parseInt(choix) <=36;
+            }catch(NumberFormatException e){
+
+            }
+            if(choix.equals("noir") || choix.equals("rouge") || choix.equals("pair") || choix.equals("impair") || choix.equals("colonne1") || choix.equals("colonne2") || choix.equals("colonne3") || choix.equals("moitie1") || choix.equals("moitie2") || choix.equals("tiers1") || choix.equals("tiers2") || choix.equals("tiers3") || nombreValide){
                 fin = true;
                 pari = choix;
                 do{
@@ -54,28 +60,19 @@ public class Roulette implements Jeu{
             }
         }while(!fin);
         boolean continuer = true;
-        boolean triche = false;
         char c;
+        App.clear();
         while(continuer){
-            App.clear();
             System.out.println("Voulez vous tricher (o/n)");
             c = App.ecouterChar();
+            App.clear();
             if (c == 'o') {
                 new Roulette().tricher();
-                System.out.println("Vous êtes sur de gagner");
                 continuer = false;
             }else if (c =='n') {
                 continuer = false;
             }
         }
-
-        Roulette r = new Roulette();
-
-        if(triche){
-            r.tricher();
-        }
-        Gain();
-
     }
 
     public static int Gain(){
@@ -199,6 +196,8 @@ public class Roulette implements Jeu{
 
     @Override
     public void tricher() {
+        App.clear();
+        System.out.println("Vous donnez un coup dans la table pour influencer le sort de la roulette\n");
         if (RAND.nextInt(100) > 75){
             if(pari.equals("noir")){
                 Roulette.setResultat(2);
@@ -227,7 +226,12 @@ public class Roulette implements Jeu{
             }else {
                 Roulette.setResultat(Integer.parseInt(pari));
             }
+        }else{
+            System.out.println("Votre coup a été remarqué !! Les vigils vous font sortir et vous payez 50€ de frais d'hopital pour soigner vos fractures");
+            App.joueur.setArgent(App.joueur.getArgent()-50);
+            argentParier = -1;
         }
+
         
     }
 
@@ -247,6 +251,7 @@ public class Roulette implements Jeu{
                 return;
             }
         }
+        baisserTemps();
         continuer = true;
         String z = "";
         while(continuer){
@@ -265,10 +270,14 @@ public class Roulette implements Jeu{
             }
         }
         Pari();
-        
-
-        
         System.out.println("Le numéro gagnant est : " + resultat);
+        if(Roulette.Gain() == 0){
+            defaite();
+        }else if(Roulette.Gain() < 0){
+            
+        }else{
+            victoire();
+        }
         Thread.sleep(3000);
     }
 
@@ -278,23 +287,13 @@ public class Roulette implements Jeu{
         System.out.println("Bravo vous avez gagner " + Roulette.Gain() +"€");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
         App.joueur.setArgent(App.joueur.getArgent() + Roulette.Gain());
-        try{
-            Thread.sleep(3000);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 
     @Override
     public void defaite() {
         App.joueur.setBonheur(App.joueur.getBonheur() - 10);
-        System.out.println("Dommage vous avez perdu");
+        System.out.println("Dommage vous avez perdu l'argent parié");
         System.out.println("Vous avez " + App.joueur.getArgent() + "€");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException ignored) {
-
-        }
     }
 
     @Override
