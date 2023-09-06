@@ -2,6 +2,8 @@ package main;
 import java.io.File;
 import java.util.Scanner;
 
+import main.Lotterie.Lotterie;
+
 public class App {
     public static Scanner scanner = new Scanner(System.in);
     public static Joueur joueur;
@@ -25,7 +27,7 @@ public class App {
         System.out.print("Nom du joueur : ");
         System.out.println(joueur.getNom());
         System.out.print("Argent du joueur : ");
-        System.out.println(joueur.getArgent());
+        System.out.println(joueur.getArgent() + " €");
         System.out.print("Nourriture du joueur : ");
         System.out.println(joueur.getNourriture());
         System.out.print("Bonheur du joueur : ");
@@ -46,6 +48,8 @@ public class App {
         char c;
         while(continuer){
             clear();
+            System.out.println("Jour -> " + joueur.getNbJours()+ " | Heure -> " + jour.getVisualHour()+"h00");
+            System.out.println("Argent -> " + joueur.getArgent() + "€ | Temps restant journée -> "+ jour.getTempsJour());
             System.out.println("Jeux possibles :");
             System.out.println("- la commande b permet de jouer au Bingo");
             System.out.println("- la commande j permet de jouer au BlackJack");
@@ -63,8 +67,16 @@ public class App {
             }else if(c == 'm'){
                 
             }else if(c == 'l'){
-                ;
+                Jeu l = new Lotterie();
+                try {
+                    l.jouer();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }else if(c == 'q'){
+                continuer = false;
+            }
+            if(joueur.getArgent() <= 0){
                 continuer = false;
             }
         }
@@ -92,9 +104,10 @@ public class App {
     public static void main(String[] args) throws Exception {
         introduction();
         Thread.sleep(2000);
+        jour = new Jour(joueur.getArgent());
         boolean continuer = true;
         char c;
-        while(joueur.getNourriture() > 0 && continuer){
+        while(joueur.getNourriture() > 0 && continuer && joueur.getArgent() > 0){
             clear();
             System.out.println("Menu principal :");
             System.out.println("- la commande i affiche les informations sur le joueur");
@@ -119,19 +132,30 @@ public class App {
                 System.out.println("Encore une journée de finie...\n");
                 System.out.println(jour);
                 Thread.sleep(2000);
-                jour = new Jour(joueur.getArgent(), joueur);
+                jour = new Jour(joueur.getArgent());
                 joueur.addNbJours();
+                joueur.jourPasse();
             }
         }
         if(!continuer){
             joueur.sauvegarder();
             clear();
             System.out.println("Partie sauvegardée !! On espère te revoir.");
-        }else{
+        }else if(joueur.getNourriture() <= 0){
+            clear();
             System.out.println("GAME OVER !!! Vous n'avez pas mangé depuis trop longtemps");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
+        }else if(joueur.getArgent() < 0){
+            clear();
+            System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
+            File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
+            file.delete();
         }
-        Thread.sleep(1000);
+        Thread.sleep(3000);
+    }
+
+    public static void setJoueur(Joueur joueur) {
+        App.joueur = joueur;
     }
 }

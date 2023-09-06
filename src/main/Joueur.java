@@ -26,8 +26,9 @@ public class Joueur {
         this.nom = nom;
     }
 
-    public void passerJour(){
+    public void jourPasse(){
         this.nourriture -= 10 + 10 * (1 - this.bonheur/100) * 2;
+        this.bonheur -= 10;
     }
 
     
@@ -48,6 +49,11 @@ public class Joueur {
 
     public void setNourriture(int nourriture) {
         this.nourriture = nourriture;
+        if(this.nourriture < 0){
+            this.nourriture = 0;
+        }else if(this.nourriture > 100){
+            this.nourriture = 100;
+        }
     }
 
     public int getArgent() {
@@ -64,6 +70,11 @@ public class Joueur {
 
     public void setBonheur(int bonheur) {
         this.bonheur = bonheur;
+        if(this.bonheur < 0){
+            this.bonheur = 0;
+        }else if(this.bonheur > 100){
+            this.bonheur = 100;
+        }
     }
 
     public void sauvegarder(){

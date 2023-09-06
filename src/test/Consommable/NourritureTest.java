@@ -39,4 +39,9 @@ public class NourritureTest {
     public void effetTest(){
         assertEquals("Ceci est un pizza qui coute 30 pour gagner 10 point de nourriture.",n.effet());
     }
+
+    @Test
+    public void acheteTest(){
+        
+    }
 }
