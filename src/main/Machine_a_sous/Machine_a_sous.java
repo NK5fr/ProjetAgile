@@ -66,6 +66,17 @@ public class Machine_a_sous implements Jeu{
         continuer = true;
         while(continuer){
             App.clear();
+            System.out.println("Voulez vous les regles du jeu (o/n) ?");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                bingo.afficherRegle("MAS");
+                continuer = false;
+            }else if (c =='n') {
+                continuer = false;
+            }
+        }
+        while(continuer){
+            App.clear();
             System.out.println("Voulez vous entrez le prix de la machine est " + Machine_a_sous.prix +"€ (o/n)");
             c = App.ecouterChar();
             if (c == 'o') {
