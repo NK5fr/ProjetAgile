@@ -61,13 +61,8 @@ public class bingo implements Jeu{
     }
 
     public void tricher(){
-        triche = 0;
+        triche = 30 + (nbtriche - 1) * 10;
         nbtriche ++;
-        if (nbtriche == 1){
-            triche = 30;
-        }else if(nbtriche>1){
-            triche += 10;
-        }
         grille1.set(g1, "  ");
         trouve1.set(g1, true);
         g1 ++;
@@ -140,6 +135,7 @@ public class bingo implements Jeu{
         Random r = new Random();
         int tr = 0;
         String chiffre;
+        triche = 0;
         while(trouve1.contains(false) && trouve2.contains(false) && trouve3.contains(false) && trouve4.contains(false) && trouve5.contains(false)){
             tr = r.nextInt(100);
             if(tr>=triche){
