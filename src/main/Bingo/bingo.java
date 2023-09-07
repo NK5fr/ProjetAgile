@@ -88,6 +88,16 @@ public class bingo implements Jeu{
         if (c == 'o'){
             App.joueur.setArgent(App.joueur.getArgent() - 20);
             afficherTitre("Bingo");
+            System.out.println("Voulez-vous voir les règles ? (o/n)");
+            c = App.ecouterChar();
+            while( c != 'o' && c != 'n'){
+                System.out.println("Caractère invalide !");
+                c = App.ecouterChar();
+            }
+            if (c == 'o'){
+                System.out.println();
+                afficherRegle("Bingo");
+            }
             create_grille();
             System.out.println();
             System.out.println("Voici ta grille : ");
