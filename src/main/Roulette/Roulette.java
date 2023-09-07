@@ -134,21 +134,21 @@ public class Roulette implements Jeu{
         System.out.println("                          __________ ");
         System.out.println("                          |   0    |  ");
         System.out.println("                 |----------------------------|");
-        System.out.println("                 |        |"+Colors.setColor("red")+"1"+Colors.resetColor()+" |"+Colors.setColor("black")+"2"+Colors.resetColor()+" |"+Colors.setColor("red")+"3"+Colors.resetColor() + " |          |");
-        System.out.println("                 |        |"+Colors.setColor("black")+"4"+Colors.resetColor() +" |"+Colors.setColor("red")+"5"+Colors.resetColor()+" |"+Colors.setColor("black")+"6"+Colors.resetColor() +" |          |");
-        System.out.println("                 | tiers1 |"+Colors.setColor("red")+"7"+Colors.resetColor()+" |"+Colors.setColor("black")+"8"+Colors.resetColor() +" |"+Colors.setColor("red")+"9"+Colors.resetColor() + " |          |");
-        System.out.println("                 |        |"+Colors.setColor("black")+"10"+Colors.resetColor()+"|"+Colors.setColor("black")+"11"+Colors.resetColor()+"|"+Colors.setColor("red")+"12"+Colors.resetColor()+"|  moitie1 |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"1"+Colors.resetColor()+" |"+Colors.setColor("grey")+"2"+Colors.resetColor()+" |"+Colors.setColor("red")+"3"+Colors.resetColor() + " |          |");
+        System.out.println("                 |        |"+Colors.setColor("grey")+"4"+Colors.resetColor() +" |"+Colors.setColor("red")+"5"+Colors.resetColor()+" |"+Colors.setColor("grey")+"6"+Colors.resetColor() +" |          |");
+        System.out.println("                 | tiers1 |"+Colors.setColor("red")+"7"+Colors.resetColor()+" |"+Colors.setColor("grey")+"8"+Colors.resetColor() +" |"+Colors.setColor("red")+"9"+Colors.resetColor() + " |          |");
+        System.out.println("                 |        |"+Colors.setColor("grey")+"10"+Colors.resetColor()+"|"+Colors.setColor("grey")+"11"+Colors.resetColor()+"|"+Colors.setColor("red")+"12"+Colors.resetColor()+"|  moitie1 |");
         System.out.println("                 |-----------------|          | ");
-        System.out.println("                 |        |"+Colors.setColor("black")+"13"+Colors.resetColor()+"|"+Colors.setColor("red")+"14"+Colors.resetColor()+"|"+Colors.setColor("black")+"15"+Colors.resetColor()+"|          |");
-        System.out.println("                 | tiers2 |"+Colors.setColor("red")+"16"+Colors.resetColor()+"|"+Colors.setColor("black")+"17"+Colors.resetColor()+"|"+Colors.setColor("red")+"18"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("grey")+"13"+Colors.resetColor()+"|"+Colors.setColor("red")+"14"+Colors.resetColor()+"|"+Colors.setColor("grey")+"15"+Colors.resetColor()+"|          |");
+        System.out.println("                 | tiers2 |"+Colors.setColor("red")+"16"+Colors.resetColor()+"|"+Colors.setColor("grey")+"17"+Colors.resetColor()+"|"+Colors.setColor("red")+"18"+Colors.resetColor()+"|          |");
         System.out.println("                 |        |-------------------| ");
-        System.out.println("                 |        |"+Colors.setColor("red")+"19"+Colors.resetColor()+"|"+Colors.setColor("black")+"20"+Colors.resetColor()+"|"+Colors.setColor("red")+"21"+Colors.resetColor()+"|          |");
-        System.out.println("                 |        |"+Colors.setColor("black")+"22"+Colors.resetColor()+"|"+Colors.setColor("red")+"23"+Colors.resetColor()+"|"+Colors.setColor("black")+"24"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"19"+Colors.resetColor()+"|"+Colors.setColor("grey")+"20"+Colors.resetColor()+"|"+Colors.setColor("red")+"21"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("grey")+"22"+Colors.resetColor()+"|"+Colors.setColor("red")+"23"+Colors.resetColor()+"|"+Colors.setColor("grey")+"24"+Colors.resetColor()+"|          |");
         System.out.println("                 |-----------------|          |");
-        System.out.println("                 |        |"+Colors.setColor("red")+"25"+Colors.resetColor()+"|"+Colors.setColor("black")+"26"+Colors.resetColor()+"|"+Colors.setColor("red")+"27"+Colors.resetColor()+"|  moitie2 |");
-        System.out.println("                 | tiers3 |"+Colors.setColor("black")+"28"+Colors.resetColor()+"|"+Colors.setColor("black")+"29"+Colors.resetColor()+"|"+Colors.setColor("red")+"30"+Colors.resetColor()+"|          |");
-        System.out.println("                 |        |"+Colors.setColor("black")+"31"+Colors.setColor("black")+"|"+Colors.setColor("red")+"32"+Colors.resetColor()+"|"+Colors.setColor("black")+"33"+Colors.resetColor()+"|          |");
-        System.out.println("                 |        |"+Colors.setColor("red")+"34"+Colors.resetColor()+"|"+Colors.setColor("black")+"35"+Colors.resetColor()+"|"+Colors.setColor("red")+"36"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"25"+Colors.resetColor()+"|"+Colors.setColor("grey")+"26"+Colors.resetColor()+"|"+Colors.setColor("red")+"27"+Colors.resetColor()+"|  moitie2 |");
+        System.out.println("                 | tiers3 |"+Colors.setColor("grey")+"28"+Colors.resetColor()+"|"+Colors.setColor("grey")+"29"+Colors.resetColor()+"|"+Colors.setColor("red")+"30"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("grey")+"31"+Colors.setColor("grey")+"|"+Colors.setColor("red")+"32"+Colors.resetColor()+"|"+Colors.setColor("grey")+"33"+Colors.resetColor()+"|          |");
+        System.out.println("                 |        |"+Colors.setColor("red")+"34"+Colors.resetColor()+"|"+Colors.setColor("grey")+"35"+Colors.resetColor()+"|"+Colors.setColor("red")+"36"+Colors.resetColor()+"|          |");
         System.out.println("                 |________|__|__|__|__________| ");
         System.out.println("                          |c1|c2|c3|    ");
     }
@@ -278,7 +278,7 @@ public class Roulette implements Jeu{
         }else{
             victoire();
         }
-        Thread.sleep(3000);
+        Thread.sleep(6000);
     }
 
     @Override
