@@ -2,6 +2,7 @@ package main.Machine_a_sous;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import main.App;
 import main.Jeu;
@@ -17,6 +18,7 @@ public class Machine_a_sous implements Jeu{
     private final static int DUREE = 4;
     private final static int prix = 10;
     private final static int frais_medic = 250;
+    private final static Random RAND = new Random();
 
     public Machine_a_sous() {
         this.machine = Arrays.asList(new Anneau(),new Anneau(),new Anneau());
@@ -64,6 +66,17 @@ public class Machine_a_sous implements Jeu{
         continuer = true;
         while(continuer){
             App.clear();
+            System.out.println("Voulez vous les regles du jeu (o/n) ?");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                bingo.afficherRegle("MAS");
+                continuer = false;
+            }else if (c =='n') {
+                continuer = false;
+            }
+        }
+        while(continuer){
+            App.clear();
             System.out.println("Voulez vous entrez le prix de la machine est " + Machine_a_sous.prix +"€ (o/n)");
             c = App.ecouterChar();
             if (c == 'o') {
@@ -90,23 +103,25 @@ public class Machine_a_sous implements Jeu{
         bingo.afficherTitre("MAS");
         if (triche){
             if (Anneau.RAND.nextInt(4) != 1) {
-                System.out.println("Vous avez baisser le voltage de la machine les anneaux tourne moins vite");
-                Anneau.setSpeed(1000);
+                System.out.println("Vous avez hacké la machine tout les anneaux vont forcément s'arreter sur le même symbole");
                 try {
                     Thread.sleep(3000);
                 } catch (Exception e) {
                     // TODO: handle exception
                 }
+                int random = RAND.nextInt(4);
                 for (int i = 0; i < 30; i++) {
                     m.roll();
                     if (i%10 == 0) {
-                        Machine_a_sous.rep = null;
+                        
+                        m.machine.get(i/10).setIdx(random);
                         m.stopAnneau();
                     }
                     try {
                         Thread.sleep(Anneau.speed);
                     } catch (Exception ignored) {}
                 }
+                
             }else {
                 this.tricher();
                 this.defaite();

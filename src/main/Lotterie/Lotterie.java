@@ -153,6 +153,17 @@ public class Lotterie implements Jeu{
         bingo.afficherTitre("Loterie");
         while(continuer){
             App.clear();
+            System.out.println("Voulez vous les regles du jeu (o/n) ?");
+            c = App.ecouterChar();
+            if (c == 'o') {
+                bingo.afficherRegle("Loterie");
+                continuer = false;
+            }else if (c =='n') {
+                continuer = false;
+            }
+        }
+        while(continuer){
+            App.clear();
             System.out.println("Voulez vous entrez le ticket coûte " + Lotterie.PRIX_TICKET +"€ (o/n)");
             c = App.ecouterChar();
             if (c == 'o') {
