@@ -265,7 +265,7 @@ public class App {
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
             file.delete();
             saveClassement();
-        }else if(joueur.getArgent() < 0){
+        }else if(joueur.getArgent() <= 0){
             //clear();
             System.out.println("GAME OVER !!! Vous n'avez plus d'argent et vous finissez par mourir de faim");
             File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + joueur.getNom() + ".csv");
@@ -273,6 +273,7 @@ public class App {
             saveClassement();
         }
         Thread.sleep(3000);
+        System.out.println("devrais atteindre menu principale");
     }
 
     public static void afficher_barre(String barre){

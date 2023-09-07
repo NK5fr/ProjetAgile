@@ -102,6 +102,11 @@ public class bingo implements Jeu{
             System.out.println();
             victoire();
             defaite();
+            try{
+                Thread.sleep(5000);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

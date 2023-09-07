@@ -167,9 +167,11 @@ public class BlackJack implements Jeu{
         askForBet();
         App.clear();
         startingDeal();
-        showCards();
-        askForChoice();
-        baisserTemps();
+        if (!this.player.hasBlackJack()) {
+            showCards();
+            askForChoice();
+            baisserTemps();
+        }
     }
 
     private void askForRules() {
@@ -342,7 +344,7 @@ public class BlackJack implements Jeu{
         if (this.player.isBusted()) {
             System.out.println("Game Over,\n Tu as crever (ton score est passé au dela de 21)\nPas de chance!");
         }
-        else {
+        else if (this.player.getUserScore() < this.dealer.getUserScore() && this.dealer.isBusted()){
             System.out.println("Game Over,\nLe dealer a un score plus élevé que le tiens\nPas de chance!");
         }
         try {
