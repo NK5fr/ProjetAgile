@@ -221,7 +221,6 @@ public class Lotterie implements Jeu{
                 }else {
                     this.defaite();
                 }
-                this.baisserTemps();
             }else{
                 this.tricher();
                 this.defaite();
@@ -249,7 +248,6 @@ public class Lotterie implements Jeu{
             }else {
                 this.defaite();
             }
-            this.baisserTemps();
         }
         
     }
