@@ -273,7 +273,6 @@ public class App {
             saveClassement();
         }
         Thread.sleep(3000);
-        System.out.println("devrais atteindre menu principale");
     }
 
     public static void afficher_barre(String barre){
