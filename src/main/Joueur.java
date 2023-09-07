@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import main.Bingo.bingo;
+
 public class Joueur {
     private String nom;
     private int nourriture;
@@ -104,10 +106,17 @@ public class Joueur {
             this.nbJours = Integer.valueOf(scan.next());
         }catch(FileNotFoundException e){
             System.out.println("Ahh un nouveau joueur soit le bienvenu !!");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
             this.argent = 100;
             this.nourriture = 100;
             this.bonheur = 100;
             this.nbJours = 1;
+            App.clear();
+            bingo.afficherRegle("Jeu");
         }
     }
 

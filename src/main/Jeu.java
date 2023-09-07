@@ -2,7 +2,7 @@ package main;
 
 public interface Jeu {
 
-    public void tricher();
+    public void tricher() throws InterruptedException;
 
     public void jouer() throws InterruptedException;
 

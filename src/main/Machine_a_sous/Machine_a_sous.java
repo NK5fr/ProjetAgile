@@ -51,19 +51,14 @@ public class Machine_a_sous implements Jeu{
 
     @Override
     public void tricher() {
-        if (Anneau.RAND.nextInt(4) == 2) {
-            System.out.println("Vous êtes pris la mains dans le sac. Le gérant vous envoi ses gros bras\nVous perder " + Machine_a_sous.frais_medic + "€");
-            App.joueur.setArgent(App.joueur.getArgent() - Machine_a_sous.frais_medic);
-            this.defaite();
-            return;
-        }
-        System.out.println("Vous avez baisser le voltage de la machine les anneaux tourne moins vite");
-        Anneau.setSpeed(1000);
+        System.out.println("Vous êtes pris la mains dans le sac. Le gérant vous envoi ses gros bras\nVous perder " + Machine_a_sous.frais_medic + "€");
+        App.joueur.setArgent(App.joueur.getArgent() - Machine_a_sous.frais_medic);
     }
 
     @Override
     public void jouer() {
         char c;
+        boolean triche = false;
         boolean continuer = true;
         Machine_a_sous m = new Machine_a_sous();
         continuer = true;
@@ -78,38 +73,56 @@ public class Machine_a_sous implements Jeu{
                 return;
             }
         }
+        baisserTemps();
         continuer = true;
         while(continuer){
             App.clear();
             System.out.println("Voulez vous tricher (o/n)");
             c = App.ecouterChar();
             if (c == 'o') {
-                this.tricher();
-                System.out.println("Vous êtes sur que les nombres seronts inférieur de 26");
+                triche = true;
                 continuer = false;
             }else if (c =='n') {
                 continuer = false;
             }
         }
+        continuer = true;
         bingo.afficherTitre("MAS");
- 
-        while (continuer) {
-            m.roll();
-            Thread t = new TextInputObject();
-            t.start();
-            if (Machine_a_sous.rep != null && Machine_a_sous.rep.equals("")) {
-                Machine_a_sous.rep = null;
-                m.stopAnneau();
+        if (triche){
+            if (Anneau.RAND.nextInt(4) != 1) {
+                System.out.println("Vous avez baisser le voltage de la machine les anneaux tourne moins vite");
+                Anneau.setSpeed(1000);
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    // TODO: handle exception
+                }
+                for (int i = 0; i < 30; i++) {
+                    m.roll();
+                    if (i%10 == 0) {
+                        Machine_a_sous.rep = null;
+                        m.stopAnneau();
+                    }
+                    try {
+                        Thread.sleep(Anneau.speed);
+                    } catch (Exception ignored) {}
+                }
+            }else {
+                this.tricher();
+                this.defaite();
             }
-            if (!m.machine.get(2).isRolling()) {
-                continuer = false;
+        }else {
+            for (int i = 0; i < 30; i++) {
+                m.roll();
+                if (i%10 == 0) {
+                    Machine_a_sous.rep = null;
+                    m.stopAnneau();
+                }
+                try {
+                    Thread.sleep(Anneau.speed);
+                } catch (Exception ignored) {}
             }
-            try {
-                Thread.sleep(Anneau.speed);
-            } catch (Exception ignored) {}
-            
-            
-        }
+        } 
         if ((m.machine.get(0).getIdx()) == (m.machine.get(1).getIdx()) && (m.machine.get(1).getIdx()) == (m.machine.get(2).getIdx())) {
             this.victoire();
         }else {
@@ -158,6 +171,10 @@ public class Machine_a_sous implements Jeu{
     @Override
     public int duree() {
         return Machine_a_sous.DUREE;
+    }
+
+    public String toString(){
+        return "Machine_à_sous";
     }
 
 }

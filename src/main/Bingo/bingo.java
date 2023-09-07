@@ -9,16 +9,16 @@ import main.App;
 import main.Jeu;
 
 public class bingo implements Jeu{
-    private static ArrayList<String> grille1 = new ArrayList<String>();
-    private static ArrayList<String> grille2 = new ArrayList<String>();
-    private static ArrayList<String> grille3 = new ArrayList<String>();
-    private static ArrayList<String> grille4 = new ArrayList<String>();
-    private static ArrayList<String> grille5 = new ArrayList<String>();
-    private static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
-    private static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
-    private static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
-    private static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
-    private static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
+    public static ArrayList<String> grille1 = new ArrayList<String>();
+    public static ArrayList<String> grille2 = new ArrayList<String>();
+    public static ArrayList<String> grille3 = new ArrayList<String>();
+    public static ArrayList<String> grille4 = new ArrayList<String>();
+    public static ArrayList<String> grille5 = new ArrayList<String>();
+    public static ArrayList<Boolean> trouve1 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve2 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve3 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve4 = new ArrayList<Boolean>();
+    public static ArrayList<Boolean> trouve5 = new ArrayList<Boolean>();
     public static int g1 = 0;
     public static int g2 = 0;
     public static int g3 = 0;
@@ -40,6 +40,20 @@ public class bingo implements Jeu{
         }catch(FileNotFoundException e){
             System.out.println(nom);        
         }
+    }
+
+    public static void afficherRegle(String nom){
+        File file = new File(System.getProperty("user.dir") + File.separator + "res" + File.separator + "regle" + File.separator + nom + ".txt");
+        try(Scanner sc = new Scanner(file)){
+            sc.useDelimiter("\n");
+            while(sc.hasNext()){
+                System.out.println(sc.next());
+            }
+        }catch(FileNotFoundException e){
+            System.out.println(nom);        
+        }
+        System.out.println("\n Entrez un caractère pour continuer");
+        App.scanner.next();
     }
 
     public int duree(){
@@ -275,4 +289,7 @@ public class bingo implements Jeu{
         System.out.flush();
     }
    
+    public String toString(){
+        return "Bingo";
+    }
 }

@@ -174,6 +174,7 @@ public class Boutique {
             }
         }
         System.out.println("_________________________________________________________________________________________\n");
+        System.out.println("Votre argent: " + App.joueur.getArgent() + "€");
     }
 
     public void afficherBonheur(){
@@ -185,6 +186,7 @@ public class Boutique {
             }
         }
         System.out.println("_________________________________________________________________________________________\n");
+        System.out.println("Votre argent: " + App.joueur.getArgent() + "€");
     }
 
     public void afficherTout(){
@@ -194,5 +196,6 @@ public class Boutique {
             i++;
         }
         System.out.println("_________________________________________________________________________________________\n");
+        System.out.println("Votre argent: " + App.joueur.getArgent() + "€");
     }
 }

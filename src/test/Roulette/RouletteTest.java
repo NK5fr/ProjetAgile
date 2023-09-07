@@ -43,8 +43,8 @@ public class RouletteTest {
         Roulette.setPari("noir");
         assertEquals(0,Roulette.Gain());
         Roulette.setPari("impair");
-        assertEquals(100,Roulette.Gain());
-        Roulette.setPari("tiers3");
         assertEquals(200,Roulette.Gain());
+        Roulette.setPari("tiers3");
+        assertEquals(300,Roulette.Gain());
     }
 }
